@@ -1,0 +1,4 @@
+# Folder ini untuk engine Node.js.
+# Copy 2 file dari saksi-engine/brain/scripts/:
+# - ask.mjs
+# - show-audit.mjs

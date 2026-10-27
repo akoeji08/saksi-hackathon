@@ -1,0 +1,20 @@
+{
+  "institution": "Puskesmas Tamalanrea Jaya",
+  "code": "PKM-TMJ-7371",
+  "version": "1.0-mock",
+  "generated": "2026-10-20",
+  "parent_org": "Dinas Kesehatan Kota Makassar",
+  "timezones_supported": ["WITA", "WIB"],
+  "hq_timezone": "WITA",
+  "fictional_notice": "Seluruh data adalah fiktif untuk keperluan hackathon.",
+  "records": {
+    "staff": 22,
+    "chats": 22,
+    "documents": 18,
+    "tasks": 15,
+    "patients": 15,
+    "drugs": 15,
+    "contacts": 10,
+    "facilities": 11
+  }
+}

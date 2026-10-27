@@ -1,0 +1,13 @@
+[
+  { "id": "FAC-01", "name": "Puskesmas Induk Tamalanrea Jaya", "type": "puskesmas_induk", "address": "Jl. Perintis Kemerdekaan KM 14, Tamalanrea, Makassar", "timezone": "WITA", "services": ["poli_umum", "poli_gigi", "kia", "imunisasi", "tb_dots", "vct_hiv", "gizi", "jiwa", "lab", "farmasi"] },
+  { "id": "FAC-02", "name": "Pustu Biringkanaya", "type": "pustu", "address": "Jl. Sahabat 2, Biringkanaya, Makassar", "timezone": "WITA", "services": ["poli_umum", "kia"] },
+  { "id": "FAC-03", "name": "Pustu Tamalanrea Indah", "type": "pustu", "address": "Jl. Tamalanrea Indah, Makassar", "timezone": "WITA", "services": ["poli_umum", "kia"] },
+  { "id": "FAC-04", "name": "Posyandu Melati 1", "type": "posyandu", "village": "Tamalanrea", "timezone": "WITA" },
+  { "id": "FAC-05", "name": "Posyandu Melati 2", "type": "posyandu", "village": "Tamalanrea", "timezone": "WITA" },
+  { "id": "FAC-06", "name": "Posyandu Melati 3", "type": "posyandu", "village": "Biringkanaya", "timezone": "WITA" },
+  { "id": "FAC-07", "name": "Posyandu Melati 4", "type": "posyandu", "village": "Biringkanaya", "timezone": "WITA" },
+  { "id": "FAC-08", "name": "Posyandu Melati 5", "type": "posyandu", "village": "Tamalanrea Indah", "timezone": "WITA" },
+  { "id": "FAC-09", "name": "Posyandu Melati 6", "type": "posyandu", "village": "Tamalanrea Indah", "timezone": "WITA" },
+  { "id": "FAC-10", "name": "Posyandu Melati 7", "type": "posyandu", "village": "Tamalanrea", "timezone": "WITA" },
+  { "id": "FAC-11", "name": "Posyandu Melati 8", "type": "posyandu", "village": "Biringkanaya", "timezone": "WITA" }
+]

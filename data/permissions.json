@@ -1,0 +1,96 @@
+{
+  "clearance_levels": {
+    "public": 0,
+    "internal": 1,
+    "restricted_medical": 2,
+    "restricted_finance": 2,
+    "top_secret_medical": 3
+  },
+  "roles": {
+    "kepala": {
+      "clearance": "top_secret_medical",
+      "deny_by_default": false
+    },
+    "dokter": {
+      "clearance": "restricted_medical",
+      "deny_by_default": true
+    },
+    "bidan": {
+      "clearance": "restricted_medical",
+      "deny_by_default": true
+    },
+    "perawat": {
+      "clearance": "internal",
+      "deny_by_default": true
+    },
+    "apoteker": {
+      "clearance": "internal",
+      "deny_by_default": true
+    },
+    "bendahara": {
+      "clearance": "restricted_finance",
+      "deny_by_default": true
+    },
+    "admin": {
+      "clearance": "internal",
+      "deny_by_default": true
+    },
+    "umum": {
+      "clearance": "public",
+      "deny_by_default": true
+    },
+    "magang": {
+      "clearance": "public",
+      "deny_by_default": true
+    }
+  },
+  "programs": {
+    "Cakalang": {
+      "label": "Proyek Cakalang — Investigasi KLB",
+      "classification": "top_secret_medical",
+      "allowed_groups": ["kepala", "manajemen"],
+      "allowed_individuals": ["STF-001"],
+      "subject_to_nd": true,
+      "leak_consequence": "critical"
+    },
+    "Bahari": {
+      "label": "Proyek Bahari — Pengadaan Alkes",
+      "classification": "restricted_finance",
+      "allowed_groups": ["kepala", "bendahara", "manajemen"],
+      "subject_to_nd": true
+    },
+    "HIV": {
+      "label": "Data Pasien HIV/VCT",
+      "classification": "restricted_medical",
+      "allowed_groups": ["dokter", "vct_hiv"],
+      "allowed_individuals": ["STF-003"],
+      "subject_to_nd": true
+    },
+    "TB": {
+      "label": "Data Pasien TB",
+      "classification": "restricted_medical",
+      "allowed_groups": ["dokter", "tb_dots"],
+      "subject_to_nd": true
+    },
+    "Jiwa": {
+      "label": "Data Pasien Jiwa",
+      "classification": "restricted_medical",
+      "allowed_groups": ["dokter", "jiwa"],
+      "subject_to_nd": true
+    }
+  },
+  "sensitive_fields": [
+    "nik", "phone", "bpjs_number", "medical_record", "hiv_status",
+    "tb_status", "psychiatric_diagnosis", "pregnancy_complications", "salary"
+  ],
+  "bulk_export_rules": {
+    "allowed_roles": ["kepala", "bendahara"],
+    "requires_approval": true,
+    "approval_role": "kepala"
+  },
+  "cross_timezone_coordination": {
+    "kemenkes_jakarta": "WIB",
+    "dinkes_makassar": "WITA",
+    "notice_required": true
+  }
+}

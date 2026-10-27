@@ -1,0 +1,17 @@
+[
+  { "id": "DRG-001", "name": "Amoksisilin 500mg", "category": "antibiotik", "stock": 40, "buffer_min": 200, "unit": "tablet", "status": "kritis", "last_restock": "2026-09-28", "eta_restock": "2026-10-25" },
+  { "id": "DRG-002", "name": "Amoksisilin 250mg", "category": "antibiotik", "stock": 180, "buffer_min": 150, "unit": "tablet", "status": "aman", "last_restock": "2026-10-05", "eta_restock": null },
+  { "id": "DRG-003", "name": "Parasetamol 500mg", "category": "analgesik", "stock": 110, "buffer_min": 300, "unit": "tablet", "status": "menipis", "last_restock": "2026-09-20", "eta_restock": "2026-10-25" },
+  { "id": "DRG-004", "name": "Amlodipin 10mg", "category": "antihipertensi", "stock": 320, "buffer_min": 150, "unit": "tablet", "status": "aman", "last_restock": "2026-10-01", "eta_restock": null },
+  { "id": "DRG-005", "name": "Metformin 500mg", "category": "antidiabetik", "stock": 280, "buffer_min": 150, "unit": "tablet", "status": "aman", "last_restock": "2026-10-01", "eta_restock": null },
+  { "id": "DRG-006", "name": "Rifampisin 300mg", "category": "anti_tb", "stock": 400, "buffer_min": 200, "unit": "kapsul", "status": "aman", "last_restock": "2026-10-10", "eta_restock": null },
+  { "id": "DRG-007", "name": "Isoniazid 300mg", "category": "anti_tb", "stock": 380, "buffer_min": 200, "unit": "tablet", "status": "aman", "last_restock": "2026-10-10", "eta_restock": null },
+  { "id": "DRG-008", "name": "Pirazinamid 500mg", "category": "anti_tb", "stock": 350, "buffer_min": 200, "unit": "tablet", "status": "aman", "last_restock": "2026-10-10", "eta_restock": null },
+  { "id": "DRG-009", "name": "Etambutol 400mg", "category": "anti_tb", "stock": 340, "buffer_min": 200, "unit": "tablet", "status": "aman", "last_restock": "2026-10-10", "eta_restock": null },
+  { "id": "DRG-010", "name": "Piridoksin 10mg", "category": "vitamin", "stock": 500, "buffer_min": 200, "unit": "tablet", "status": "aman", "last_restock": "2026-09-15", "eta_restock": null },
+  { "id": "DRG-011", "name": "Oralit sachet", "category": "rehidrasi", "stock": 600, "buffer_min": 200, "unit": "sachet", "status": "aman", "last_restock": "2026-08-01", "eta_restock": null },
+  { "id": "DRG-012", "name": "Vitamin A 200.000 IU", "category": "vitamin", "stock": 250, "buffer_min": 100, "unit": "kapsul", "status": "aman", "last_restock": "2026-07-15", "eta_restock": null },
+  { "id": "DRG-013", "name": "Tablet Tambah Darah", "category": "suplemen", "stock": 800, "buffer_min": 300, "unit": "tablet", "status": "aman", "last_restock": "2026-09-01", "eta_restock": null },
+  { "id": "DRG-014", "name": "Risperidon 2mg", "category": "antipsikotik", "stock": 90, "buffer_min": 60, "unit": "tablet", "status": "aman", "last_restock": "2026-09-20", "eta_restock": null },
+  { "id": "DRG-015", "name": "Reagen SGOT/SGPT", "category": "reagen", "stock": 25, "buffer_min": 50, "unit": "test", "status": "kritis", "last_restock": "2026-09-15", "eta_restock": "2026-10-24" }
+]

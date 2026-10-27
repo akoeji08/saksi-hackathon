@@ -1,0 +1,44 @@
+[
+  {
+    "program": "PIN Polio",
+    "target": "Cakupan imunisasi ≥95% anak 0–59 bulan",
+    "period": "12–18 November 2026",
+    "current": "78% (baseline imunisasi dasar)",
+    "access": ["imunisasi", "perawat", "kepala"]
+  },
+  {
+    "program": "TB Elimination",
+    "target": "Success rate ≥90%",
+    "period": "2026",
+    "current": "82% (kuartal III)",
+    "access": ["tb_dots", "dokter", "kepala"]
+  },
+  {
+    "program": "Stunting Reduction",
+    "target": "Prevalensi stunting turun 3% per tahun",
+    "period": "2026",
+    "current": "21 balita stunting (dari 312)",
+    "access": ["gizi", "stunting", "dokter", "bidan", "kepala"]
+  },
+  {
+    "program": "PMTCT (HIV ibu hamil)",
+    "target": "100% ibu hamil diskrining HIV",
+    "period": "2026",
+    "current": "72%",
+    "access": ["dokter", "vct_hiv", "kepala"]
+  },
+  {
+    "program": "Proyek Cakalang (KLB Hepatitis A)",
+    "target": "Klarifikasi sumber KLB dalam 14 hari",
+    "period": "14–25 Oktober 2026",
+    "current": "Konfirmasi 2/3 suspek positif",
+    "access": ["kepala", "manajemen"]
+  },
+  {
+    "program": "Proyek Bahari (Pengadaan USG)",
+    "target": "Kontrak vendor Q4 2026",
+    "period": "Oktober–Desember 2026",
+    "current": "Evaluasi vendor 25 Oktober",
+    "access": ["kepala", "manajemen", "bendahara"]
+  }
+]

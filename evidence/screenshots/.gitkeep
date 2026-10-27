@@ -1,0 +1,6 @@
+# Folder ini untuk screenshot demo.
+# Isi dengan file PNG setelah merekam demo:
+# - test-04-refusal.png (Cakalang refusal)
+# - test-12-injection.png (Prompt injection warning)
+# - test-19-conflict.png (Conflict jam poli)
+# - test-20-audit.png (show-audit.mjs output)

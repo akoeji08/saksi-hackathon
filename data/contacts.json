@@ -1,0 +1,12 @@
+[
+  { "id": "CON-01", "name": "RS Wahidin Sudirohusodo", "type": "rs_rujukan", "contact_person": "dr. Andi", "phone": "+62-411-500-001", "email": "rujukan@rswahidin.go.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-02", "name": "RSIA Sitti Khadijah", "type": "rs_rujukan", "contact_person": "Bidan Rara", "phone": "+62-411-500-002", "email": "igd@rsiakhadijah.co.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-03", "name": "Dinkes Kota Makassar", "type": "regulator", "contact_person": "Ibu Andi Tenri", "phone": "+62-411-500-003", "email": "dinkes@makassar.go.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-04", "name": "Kemenkes RI — Direktorat P2P", "type": "regulator", "contact_person": "dr. Bagus", "phone": "+62-21-500-004", "email": "p2p@kemkes.go.id", "timezone": "WIB", "city": "Jakarta" },
+  { "id": "CON-05", "name": "BPJS Kesehatan Cabang Makassar", "type": "payer", "contact_person": "Pak Faisal", "phone": "+62-411-500-005", "email": "makassar@bpjs-kesehatan.go.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-06", "name": "PMI Kota Makassar", "type": "mitra", "contact_person": "Ibu Nur", "phone": "+62-411-500-006", "email": "pmi@makassar.go.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-07", "name": "PT Medika Sejahtera", "type": "vendor_alkes", "contact_person": "Pak Hendra", "phone": "+62-411-500-007", "email": "sales@medikasejahtera.co.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-08", "name": "PT Alkes Nusantara", "type": "vendor_alkes", "contact_person": "Ibu Linda", "phone": "+62-21-500-008", "email": "tender@alkesnusantara.co.id", "timezone": "WIB", "city": "Jakarta" },
+  { "id": "CON-09", "name": "PT Sinar Diagnostik", "type": "vendor_alkes", "contact_person": "Pak Surya", "phone": "+62-411-500-009", "email": "info@sinardiagnostik.co.id", "timezone": "WITA", "city": "Makassar" },
+  { "id": "CON-10", "name": "PSC 119 Makassar", "type": "layanan_darurat", "contact_person": "Operator", "phone": "119", "email": null, "timezone": "WITA", "city": "Makassar" }
+]

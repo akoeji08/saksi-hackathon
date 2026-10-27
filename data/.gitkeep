@@ -1,0 +1,7 @@
+# Folder ini untuk dataset JSON.
+# Copy 5 file dari saksi-engine/data/:
+# - staff.json
+# - permissions.json
+# - documents.json
+# - chats.json
+# - drugs.json

@@ -1,0 +1,20 @@
+{
+  "prescribing_rules": [
+    { "id": "PR-01", "rule": "Antibiotik hanya diberikan dengan resep dokter, tidak boleh dijual bebas" },
+    { "id": "PR-02", "rule": "Pasien TB harus menjalani DOTS, tidak boleh diberikan OAT tanpa pemantauan" },
+    { "id": "PR-03", "rule": "ARV untuk HIV tidak tersedia di puskesmas; wajib rujuk ke RS rujukan" },
+    { "id": "PR-04", "rule": "Ibu hamil dengan preeklamsia wajib dirujuk, tidak boleh ditangani rawat jalan" },
+    { "id": "PR-05", "rule": "Pasien jiwa dengan risiko bunuh diri wajib dirujuk ke psikiater" }
+  ],
+  "confidentiality_rules": [
+    { "id": "CR-01", "rule": "Rekam medis hanya boleh diakses oleh tenaga kesehatan yang menangani pasien" },
+    { "id": "CR-02", "rule": "Status HIV tidak boleh diungkapkan ke pihak selain pasien dan tim VCT" },
+    { "id": "CR-03", "rule": "Data pasien tidak boleh dikirim ke WhatsApp umum" },
+    { "id": "CR-04", "rule": "NIK dan nomor BPJS hanya untuk keperluan administrasi, bukan untuk chat" }
+  ],
+  "claim_rules": [
+    { "id": "CL-01", "rule": "Klaim medis harus didukung bukti klinis, bukan testimoni" },
+    { "id": "CL-02", "rule": "Dilarang klaim menyembuhkan penyakit (cure claim) untuk produk herbal" },
+    { "id": "CL-03", "rule": "Klaim halal wajib disertai sertifikat halal yang valid" }
+  ]
+}

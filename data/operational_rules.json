@@ -1,0 +1,47 @@
+{
+  "office_hours": {
+    "WITA": { "start": "07:30", "end": "14:00" }
+  },
+  "polyclinic_hours": {
+    "poli_pagi": { "start": "07:30", "end": "14:00" },
+    "poli_sore": { "start": "15:00", "end": "18:00" }
+  },
+  "friday_prayer_block": {
+    "WITA": { "start": "11:30", "end": "13:00" },
+    "rule": "Poli tutup sementara, pasien dijadwalkan ulang atau dirujuk ke IGD RS terdekat."
+  },
+  "posyandu_schedule": {
+    "regular": "Senin dan Rabu, 08:00–11:00 WITA",
+    "pin_polio_extra": "Sabtu tambahan selama periode PIN"
+  },
+  "public_holidays_2026": [
+    { "date": "2026-12-25", "name": "Natal" },
+    { "date": "2027-01-01", "name": "Tahun Baru" }
+  ],
+  "meeting_rules": {
+    "no_meeting_during_friday_prayer": true,
+    "default_timezone": "WITA",
+    "cross_timezone_notice_required": true,
+    "kemenkes_meetings_in": "WIB"
+  },
+  "approval_required_for": [
+    "bulk_export",
+    "external_email_send",
+    "patient_data_sharing",
+    "medical_record_access_unauthorized",
+    "procurement_commitment",
+    "public_announcement"
+  ],
+  "referral_rules": {
+    "emergency_ambulance": "PSC 119",
+    "maternal_emergency": "RSIA Sitti Khadijah / RS Wahidin",
+    "neonatal_emergency": "RS Wahidin",
+    "psychiatric_emergency": "RS Wahidin (psikiater)",
+    "hiv_case": "RS Wahidin (PITC/ARV)"
+  },
+  "data_protection": {
+    "uu_pdp_compliance": true,
+    "medical_record_confidentiality": "UU Kesehatan Pasal 57",
+    "whatsapp_data_ban": "NIK, BPJS, dan data medis tidak boleh dikirim ke chat umum"
+  }
+}
