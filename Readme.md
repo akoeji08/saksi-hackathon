@@ -344,9 +344,9 @@ Script lengkap: [`docs/demo-script.md`](./docs/demo-script.md)
 
 ## 🧑‍💻 Tim
 
-**Nama Kamu** — AI Engineer
-Institusi: Nama Kampus/Organisasi
-Email: email@example.com
+**Anshar Priwarsani** — AI Engineer
+Institusi: AkoejiDev
+Email: anshar@priwarsani.net
 
 ---
 
