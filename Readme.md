@@ -99,7 +99,7 @@ git --version
 
 ```powershell
 # 1. Clone repo
-git clone https://github.com/USERNAME/saksi-hackathon.git
+git clone https://github.com/akoeji08/saksi-hackathon.git
 cd saksi-hackathon
 
 # 2. Uji engine standalone
