@@ -2,141 +2,393 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>SAKSI — WorkBuddy Chat</title>
+<title>SAKSI — WorkBuddy Desktop</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ---------- WorkBuddy Desktop palette (matches real app) ---------- */
+  :root {
+    --bg-app:      #0b0d10;   /* window background        */
+    --bg-sidebar:  #121417;   /* sidebar background       */
+    --bg-main:     #0b0d10;   /* chat area background     */
+    --bg-elev:     #17191d;   /* cards / bubbles          */
+    --bg-elev-2:   #1e2126;   /* hover / input            */
+    --border:      #24272c;   /* hairlines                */
+    --border-soft: #1c1f23;
+    --txt:         #e8eaed;   /* primary text             */
+    --txt-2:       #9aa0a6;   /* secondary text           */
+    --txt-3:       #6b7075;   /* tertiary / timestamps    */
+    --accent:      #4a9eff;   /* WorkBuddy blue           */
+    --accent-2:    #2b7fe0;
+    --cyan:        #22d3ee;   /* SAKSI cyan               */
+    --green:       #3fb950;
+    --red:         #f85149;
+    --yellow:      #d29922;
+    --orange:      #ff7b47;
+  }
+
   body {
-    width: 1400px;
-    height: 900px;
-    background: #0d1117;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: #e6edf3;
+    width: 1280px;
+    height: 100vh;
+    min-height: 560px;
+    background: var(--bg-app);
+    font-family: 'Segoe UI', 'Microsoft YaHei UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--txt);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  .titlebar {
-    height: 52px;
-    background: #161b22;
-    border-bottom: 1px solid #30363d;
+
+  /* ================= WINDOW CHROME ================= */
+  .window-chrome {
+    height: 34px;
+    background: var(--bg-app);
+    border-bottom: 1px solid var(--border-soft);
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    gap: 12px;
+    padding: 0 6px 0 10px;
     flex-shrink: 0;
+    font-size: 12px;
+    color: var(--txt-2);
   }
-  .logo {
-    width: 26px; height: 26px;
-    background: linear-gradient(135deg, #00d4ff, #0090cc);
-    border-radius: 6px;
+  .chrome-icons { display: flex; align-items: center; gap: 11px; margin-right: 18px; }
+  .chrome-icons svg { width: 14px; height: 14px; stroke: var(--txt-2); fill: none; stroke-width: 1.5; opacity: .85; }
+  .chrome-menu { display: flex; gap: 16px; }
+  .chrome-menu span { font-size: 12px; color: var(--txt-2); }
+  .win-controls { margin-left: auto; display: flex; gap: 2px; }
+  .win-controls i {
+    width: 32px; height: 24px; display: flex; align-items: center; justify-content: center;
+    color: var(--txt-3); font-size: 11px; font-style: normal;
+  }
+
+  /* ================= APP BODY ================= */
+  .app { flex: 1; display: flex; overflow: hidden; }
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar {
+    width: 232px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-soft);
+    display: flex; flex-direction: column;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  .sb-brand { padding: 14px 16px 10px; }
+  .sb-brand .name { font-size: 13.5px; font-weight: 700; color: var(--txt); letter-spacing: .2px; }
+  .sb-brand .ver  { font-size: 11px; color: var(--txt-3); margin-top: 1px; }
+
+  .sb-nav { padding: 4px 8px 8px; }
+  .sb-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 8px; border-radius: 6px; color: var(--txt-2); font-size: 13px;
+  }
+  .sb-item svg { width: 15px; height: 15px; stroke: var(--txt-2); fill: none; stroke-width: 1.6; flex-shrink: 0; }
+  .sb-item .tag {
+    margin-left: auto; font-size: 9.5px; font-weight: 600; letter-spacing: .3px;
+    padding: 1px 5px; border-radius: 4px; background: #2a2d33; color: var(--txt-3);
+    text-transform: uppercase;
+  }
+
+  .sb-sep { height: 1px; background: var(--border-soft); margin: 8px 12px; }
+
+  .sb-section {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px 5px; font-size: 11.5px; color: var(--txt-3);
+  }
+  .sb-section .cnt { font-size: 11px; color: var(--txt-3); }
+
+  .sb-tasks { flex: 1; overflow: hidden; padding: 0 8px; position: relative; }
+  .sb-tasks::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22px;
+    background: linear-gradient(to bottom, rgba(18,20,23,0), var(--bg-sidebar));
+    pointer-events: none;
+  }
+  .sb-task {
+    padding: 6px 8px; border-radius: 6px; color: var(--txt-2); font-size: 12.5px;
+    display: flex; align-items: center; gap: 8px; line-height: 1.35;
+  }
+  .sb-task.active { background: var(--bg-elev-2); color: var(--txt); }
+  .sb-task .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--txt-3); flex-shrink: 0; }
+  .sb-task.active .dot { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+  .sb-task .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .sb-task .dt { font-size: 10.5px; color: var(--txt-3); flex-shrink: 0; }
+
+  .sb-user {
+    padding: 10px 12px; border-top: 1px solid var(--border-soft);
+    display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--txt-2);
+  }
+  .sb-user .av {
+    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, #2ecc71, #16a085);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 15px; color: #050b14;
+    font-size: 11px; font-weight: 700; color: #06110d;
   }
-  .title { font-size: 14px; font-weight: 600; }
-  .subtitle { font-size: 12px; color: #8b949e; }
-  .badges { margin-left: auto; display: flex; gap: 8px; }
-  .badge {
-    font-size: 11px; padding: 4px 10px;
-    background: #21262d; border: 1px solid #30363d;
-    border-radius: 12px; color: #8b949e;
+  .sb-user .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* ---------- MAIN CHAT ---------- */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+
+  .chat-head {
+    height: 44px; flex-shrink: 0;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex; align-items: center; gap: 10px; padding: 0 18px;
   }
-  .badge.acc { background: rgba(0,212,255,0.12); border-color: #00d4ff; color: #00d4ff; }
+  .chat-head .t { font-size: 13.5px; font-weight: 600; color: var(--txt); }
+  .chat-head .sp { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .chat-head .sp svg { width: 16px; height: 16px; stroke: var(--txt-2); fill: none; stroke-width: 1.5; }
 
-  .chat { flex: 1; padding: 24px 32px; overflow: hidden; }
+  .chat {
+    flex: 1; overflow: hidden;
+    padding: 22px 30px 8px 30px;
+  }
+  .chat-inner { max-width: 900px; margin: 0 auto; width: 100%; }
 
-  .msg { margin-bottom: 20px; display: flex; gap: 12px; }
+  /* ---------- MESSAGE ---------- */
+  .msg { display: flex; gap: 11px; margin-bottom: 22px; align-items: flex-start; }
   .msg.user { flex-direction: row-reverse; }
   .avatar {
-    width: 34px; height: 34px; border-radius: 8px;
+    width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; margin-top: 2px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    font-size: 12px; font-weight: 700;
   }
-  .avatar.user { background: #30363d; color: #e6edf3; }
-  .avatar.ai { background: linear-gradient(135deg, #00d4ff, #0090cc); color: #050b14; }
+  .avatar.user { background: var(--bg-elev-2); color: var(--txt-2); border: 1px solid var(--border); }
+  .avatar.ai {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; font-size: 13px;
+  }
   .bubble {
-    max-width: 880px; border-radius: 12px;
-    padding: 14px 18px; font-size: 14px; line-height: 1.65;
+    border-radius: 10px; padding: 13px 16px;
+    font-size: 13.5px; line-height: 1.7; max-width: 780px;
+    flex-shrink: 0;
   }
-  .msg.user .bubble { background: #1f6feb; color: #fff; }
-  .msg.ai .bubble { background: #161b22; border: 1px solid #30363d; }
+  .msg.user .bubble { background: var(--accent); color: #fff; }
+  .msg.ai   .bubble { background: var(--bg-elev); border: 1px solid var(--border); color: var(--txt); }
 
   .query-cmd {
     font-family: 'Cascadia Code', Consolas, monospace;
-    background: rgba(255,255,255,0.14);
-    padding: 2px 8px; border-radius: 5px; font-size: 13.5px;
+    background: rgba(255,255,255,0.22); padding: 1px 6px; border-radius: 4px;
+    font-size: 13px; font-weight: 600;
   }
-  .evlabel { color: #58a6ff; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; margin: 14px 0 7px; text-transform: uppercase; }
+
+  /* ---------- EVIDENCE CARD ---------- */
+  .evlabel {
+    color: var(--accent); font-size: 10.5px; font-weight: 700;
+    letter-spacing: .8px; margin: 15px 0 8px; text-transform: uppercase;
+  }
   .evcard {
-    background: #0d1117; border: 1px solid #30363d; border-left: 3px solid #00d4ff;
-    border-radius: 7px; padding: 9px 13px; margin-bottom: 7px;
-    font-size: 13px; display: flex; align-items: baseline; gap: 10px;
+    background: #101317; border: 1px solid var(--border); border-left: 2.5px solid var(--cyan);
+    border-radius: 6px; padding: 9px 12px; margin-bottom: 6px;
+    font-size: 12.5px; display: flex; align-items: baseline; gap: 10px;
   }
-  .evid { font-family: 'Cascadia Code', Consolas, monospace; color: #00d4ff; font-weight: 700; font-size: 12.5px; }
-  .evtitle { color: #e6edf3; }
-  .evdate { color: #6e7681; font-size: 11.5px; margin-left: auto; }
+  .evid {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    color: var(--cyan); font-weight: 700; font-size: 11.5px; flex-shrink: 0;
+  }
+  .evtitle { color: var(--txt); flex: 1; }
+  .evdate { color: var(--txt-3); font-size: 11px; flex-shrink: 0; }
+
   .footerline {
-    margin-top: 14px; padding-top: 11px; border-top: 1px dashed #30363d;
-    font-size: 12px; color: #8b949e; font-family: 'Cascadia Code', Consolas, monospace;
+    margin-top: 13px; padding-top: 10px; border-top: 1px dashed var(--border);
+    font-size: 11.5px; color: var(--txt-3);
+    font-family: 'Cascadia Code', Consolas, monospace;
   }
+
+  /* ---------- WARNING ---------- */
   .warn {
-    background: rgba(248,81,73,0.10); border: 1px solid #f85149; border-radius: 8px;
-    padding: 12px 14px; margin-bottom: 14px; font-size: 13px; color: #ffb4ab;
-    line-height: 1.6;
+    background: rgba(248,81,73,0.10); border: 1px solid rgba(248,81,73,0.55);
+    border-radius: 8px; padding: 11px 13px; margin-bottom: 13px;
+    font-size: 12.5px; color: #ffb4ab; line-height: 1.65;
   }
   .warn b { color: #ff7b72; }
   .blocked {
     font-family: 'Cascadia Code', Consolas, monospace;
-    background: rgba(248,81,73,0.15); color: #ff7b72;
-    padding: 2px 7px; border-radius: 4px; font-size: 12.5px; font-weight: 700;
+    background: rgba(248,81,73,0.16); color: #ff7b72;
+    padding: 1px 6px; border-radius: 4px; font-size: 12px; font-weight: 700;
   }
+
+  /* ---------- TERMINAL ---------- */
   .terminal {
-    background: #010409; border: 1px solid #30363d; border-radius: 9px;
-    padding: 16px 20px; font-family: 'Cascadia Code', Consolas, monospace;
-    font-size: 12.5px; line-height: 1.75; color: #c9d1d9;
+    background: #05070a; border: 1px solid var(--border); border-radius: 8px;
+    padding: 15px 18px; font-family: 'Cascadia Code', Consolas, monospace;
+    font-size: 12px; line-height: 1.8; color: #c9d1d9;
     white-space: pre-wrap; word-break: break-word;
+    flex-shrink: 0; height: auto;
   }
-  .t-dim { color: #6e7681; }
-  .t-cyan { color: #00d4ff; }
-  .t-green { color: #3fb950; }
-  .t-yellow { color: #d29922; }
+  .t-dim { color: #6b7075; }
+  .t-cyan { color: var(--cyan); }
+  .t-green { color: var(--green); }
+  .t-yellow { color: var(--yellow); }
   .t-red { color: #ff7b72; }
-  .t-white { color: #e6edf3; font-weight: 600; }
-  .t-sep { color: #30363d; }
-  .refusal { color: #e6edf3; }
+  .t-white { color: #e8eaed; font-weight: 600; }
+
   .identical {
-    display: inline-block; margin-top: 12px; padding: 6px 14px;
-    background: rgba(63,185,80,0.14); border: 1px solid #3fb950; border-radius: 8px;
-    color: #3fb950; font-size: 12.5px; font-weight: 700; letter-spacing: 0.4px;
+    display: inline-block; margin-top: 11px; padding: 5px 12px;
+    background: rgba(63,185,80,0.13); border: 1px solid rgba(63,185,80,0.5);
+    border-radius: 6px; color: var(--green);
+    font-size: 12px; font-weight: 700; letter-spacing: .3px;
   }
+
   .meta {
-    margin-top: 18px; padding: 11px 15px;
-    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
-    font-size: 12px; color: #8b949e;
+    margin-top: 16px; padding: 10px 13px;
+    background: #101317; border: 1px solid var(--border); border-radius: 7px;
+    font-size: 11.5px; color: var(--txt-2);
   }
-  .meta .k { color: #58a6ff; }
-  .divider {
-    display: flex; align-items: center; gap: 12px; margin: 22px 0;
-    color: #6e7681; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  .meta .k { color: var(--accent); font-weight: 600; }
+
+  /* ---------- TOOLBAR UNDER MESSAGE ---------- */
+  .toolbar {
+    display: flex; align-items: center; gap: 4px; padding: 0 0 18px 39px;
   }
-  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #30363d; }
+  .toolbar svg { width: 14px; height: 14px; stroke: var(--txt-3); fill: none; stroke-width: 1.6; }
+  .toolbar .sp { margin-left: 6px; font-size: 11.5px; color: var(--txt-3); }
+  .toolbar .sp b { color: var(--txt-2); font-weight: 600; }
+
+  /* ---------- INPUT BOX ---------- */
+  .composer {
+    flex-shrink: 0; padding: 4px 30px 16px 30px;
+  }
+  .composer-inner { max-width: 900px; margin: 0 auto; }
+  .input-box {
+    background: var(--bg-elev-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .input-box .ph { font-size: 13px; color: var(--txt-3); }
+  .input-row { display: flex; align-items: center; gap: 10px; margin-top: 9px; }
+  .input-row .plus { color: var(--txt-2); font-size: 17px; line-height: 1; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; color: var(--txt-2);
+    padding: 4px 9px; border-radius: 6px; background: #23262b;
+  }
+  .chip svg { width: 13px; height: 13px; stroke: var(--txt-2); fill: none; stroke-width: 1.5; }
+  .chip .caret { font-size: 9px; color: var(--txt-3); }
+  .input-row .right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+  .input-row .right svg { width: 15px; height: 15px; stroke: var(--txt-3); fill: none; stroke-width: 1.5; }
+  .send {
+    width: 27px; height: 27px; border-radius: 50%;
+    background: #2a2d33; display: flex; align-items: center; justify-content: center;
+  }
+  .send svg { width: 13px; height: 13px; stroke: var(--txt-3); fill: none; stroke-width: 1.8; }
+
+  .stats {
+    text-align: center; font-size: 11px; color: var(--txt-3); margin-top: 9px;
+  }
+  .stats b { color: var(--txt-2); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div class="titlebar">
-  <div class="logo">S</div>
-  <div>
-    <div class="title">SAKSI — Workplace Brain</div>
-    <div class="subtitle">WorkBuddy Desktop · Chat</div>
+<!-- ============ WINDOW CHROME ============ -->
+<div class="window-chrome">
+  <div class="chrome-icons">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M5 5l9 9M14 5l-9 9"/></svg>
   </div>
-  <div class="badges">
-    <div class="badge acc">Skill: /saksi</div>
-    <div class="badge">User: STF-005</div>
-    <div class="badge">Tencent Cloud Hackathon Indonesia 2026</div>
+  <div class="chrome-menu">
+    <span>Edit(E)</span><span>Jendela(W)</span><span>Bantuan(H)</span><span>Tentang(A)</span>
+  </div>
+  <div class="win-controls">
+    <i>&#8211;</i><i>&#9633;</i><i>&#10005;</i>
   </div>
 </div>
 
-<div class="chat" id="chat"></div>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="name">WorkBuddy AI</div>
+      <div class="ver">v5.9.4</div>
+    </div>
+
+    <nav class="sb-nav">
+      <div class="sb-item">
+        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1118 0 9 9 0 01-18 0z"/><path d="M12 8v4l3 2"/></svg>
+        <span>Tugas Baru</span>
+      </div>
+      <div class="sb-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0114 0"/></svg>
+        <span>Asisten</span><span class="tag">BETA</span>
+      </div>
+      <div class="sb-item">
+        <svg viewBox="0 0 24 24"><path d="M8 10h8M8 14h5"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg>
+        <span>Ahli · Keterampilan · Penghubung</span>
+      </div>
+      <div class="sb-item">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+        <span>Tugas Terjadwal</span>
+      </div>
+      <div class="sb-item">
+        <svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg>
+        <span>Ruang Pengetahuan</span>
+      </div>
+    </nav>
+
+    <div class="sb-sep"></div>
+
+    <div class="sb-section"><span>Tugas</span><span class="cnt">(28)</span></div>
+    <div class="sb-tasks" id="sbtasks"></div>
+
+    <div class="sb-sep"></div>
+
+    <div class="sb-section"><span>Ruang Kerja</span><span class="cnt">(3)</span></div>
+    <div class="sb-tasks">
+      <div class="sb-task">
+        <span class="dot" style="background:#ff7b47"></span>
+        <span class="nm">Teman Berhuang, Krede...</span>
+      </div>
+      <div class="sb-task">
+        <span class="dot" style="background:#3fb950"></span>
+        <span class="nm">Undangan tim dan lokasi</span>
+      </div>
+    </div>
+
+    <div class="sb-user">
+      <div class="av">AP</div>
+      <span class="nm">anshar.priwarsani@...</span>
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--txt-3);fill:none;stroke-width:1.6;margin-left:auto"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <div class="chat-head">
+      <span class="t" id="chattitle">SAKSI — Evidence-to-Decision Engine</span>
+      <div class="sp">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M14 3l7 7-4 4-7-7z"/><path d="M13 21H4v-9"/></svg>
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>
+      </div>
+    </div>
+
+    <div class="chat" id="chat">
+      <div class="chat-inner" id="chatinner"></div>
+    </div>
+
+    <div class="composer">
+      <div class="composer-inner">
+        <div class="input-box">
+          <div class="ph">Apa yang bisa saya bantu hari ini? @ tambahkan konteks / aktifkan keterampilan dan perintah</div>
+          <div class="input-row">
+            <span class="plus">+</span>
+            <span class="chip">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+              Izinkan akses penuh <span class="caret">&#9662;</span>
+            </span>
+            <div class="right">
+              <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.3-5.6M20 4v4h-4"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg>
+              <div class="send"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="stats">&nbsp;</div>
+      </div>
+    </div>
+  </main>
+</div>
 
 </body>
 </html>
