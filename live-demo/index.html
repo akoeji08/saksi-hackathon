@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SAKSI — Evidence-to-Decision Engine · Live Demo</title>
+<meta name="description" content="Live demo SAKSI: workplace brain berizin, bersumber, dan berjejak audit untuk Puskesmas Tamalanrea Jaya." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="mark">S</div>
+    <div class="brand-text">
+      <h1>SAKSI</h1>
+      <p>Evidence-to-Decision Engine</p>
+    </div>
+  </div>
+
+  <div class="topbar-mid">
+    <span class="pill live"><span class="dot"></span>Live demo</span>
+    <span class="pill ghost">Engine v5</span>
+    <span class="pill ghost hide-sm">100% di browser</span>
+  </div>
+
+  <nav class="topbar-links">
+    <button type="button" class="linkbtn" id="resetBtn">Mulai ulang</button>
+    <a href="https://github.com/akoeji08/saksi-hackathon" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://youtu.be/AMkMF_ZJjUo" target="_blank" rel="noopener">Demo video</a>
+  </nav>
+</header>
+
+<main class="layout">
+
+  <!-- ================= LEFT: identity + gate ================= -->
+  <aside class="col-left">
+    <section class="card">
+      <h2 class="card-title">Bertanya sebagai</h2>
+      <p class="card-sub">Identitas diambil dari file lokal, bukan dari prompt.</p>
+      <div id="userList" class="user-list"></div>
+    </section>
+
+    <section class="card gate-card">
+      <h2 class="card-title">Permission gate</h2>
+      <p class="card-sub">Izin diperiksa <b>sebelum</b> retrieval.</p>
+      <div class="gate-stats">
+        <div class="gate-stat">
+          <span class="gate-num" id="gateBlocked">—</span>
+          <span class="gate-lbl">diblokir</span>
+        </div>
+        <div class="gate-stat">
+          <span class="gate-num" id="gateScanned">—</span>
+          <span class="gate-lbl">dipindai</span>
+        </div>
+        <div class="gate-stat">
+          <span class="gate-num cyan" id="gateAllowed">—</span>
+          <span class="gate-lbl">lolos ACL</span>
+        </div>
+      </div>
+      <p class="gate-note" id="gateNote">Ajukan pertanyaan untuk melihat gate bekerja.</p>
+    </section>
+
+    <section class="card legend">
+      <h2 class="card-title">Tingkat clearance</h2>
+      <ul>
+        <li><span class="clr public"></span>public</li>
+        <li><span class="clr internal"></span>internal</li>
+        <li><span class="clr restricted_medical"></span>restricted_medical</li>
+        <li><span class="clr restricted_finance"></span>restricted_finance</li>
+        <li><span class="clr top_secret_medical"></span>top_secret_medical</li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- ================= CENTER: chat ================= -->
+  <section class="col-chat">
+    <div class="chat-scroll" id="chatScroll">
+      <div class="welcome" id="welcome">
+        <h2>Tanya apa saja tentang operasional puskesmas.</h2>
+        <p>
+          Setiap jawaban datang dengan kartu bukti. Kalau bukti tidak ada —
+          atau Anda tidak berhak melihatnya — SAKSI menolak dengan kalimat yang sama.
+        </p>
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+      <div id="messages" class="messages"></div>
+    </div>
+
+    <div class="composer">
+      <form id="askForm" class="composer-inner">
+        <input
+          id="queryInput"
+          type="text"
+          autocomplete="off"
+          placeholder="Tulis pertanyaan… contoh: Berapa stok Amoksisilin 500mg sekarang?"
+        />
+        <button type="submit" id="sendBtn" aria-label="Kirim">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+      <p class="disclaimer">
+        Data <b>fiktif</b>. Engine deterministik berjalan sepenuhnya di browser Anda —
+        tidak ada pertanyaan yang dikirim ke server.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= RIGHT: audit ================= -->
+  <aside class="col-right">
+    <section class="card audit-card">
+      <div class="audit-head">
+        <h2 class="card-title">Audit ledger</h2>
+        <span class="audit-count" id="auditCount">0</span>
+      </div>
+      <p class="card-sub">Metadata saja — query disamarkan, tanpa isi jawaban.</p>
+      <div id="auditList" class="audit-list">
+        <p class="audit-empty">Belum ada entri.</p>
+      </div>
+    </section>
+  </aside>
+
+</main>
+
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

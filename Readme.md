@@ -323,6 +323,7 @@ Video dibuat dengan Remotion (React + TypeScript). Source code: [`demo-video/`](
 |:---|:---|:---:|
 | Project title | SAKSI — Evidence-to-Decision Engine | ✅ |
 | Short blurb | "Workplace brain berizin, bersumber, dan berjejak audit." | ✅ |
+| Live demo | https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO | ✅ |
 | Project description | [`docs/`](./docs/) | ✅ |
 | Accountability sheet | [`docs/accountability.md`](./docs/accountability.md) | ✅ |
 | Test results | [`docs/test-results.md`](./docs/test-results.md) | ✅ |
