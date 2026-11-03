@@ -240,5 +240,5 @@ Dengan mengombinasikan skill WorkBuddy dan engine eksternal yang deterministik, 
 
 ---
 
-**Kontak:** [email kamu]
+**Kontak:** anshar@priwarsani.net
 **Repo:** https://github.com/akoeji08/saksi-hackathon

@@ -7,7 +7,7 @@ Setup 3 langkah, 2 menit.
 Buka PowerShell, jalankan:
 
 ```powershell
-git clone https://github.com/USERNAME/saksi-hackathon.git
+git clone https://github.com/akoeji08/saksi-hackathon.git
 cd saksi-hackathon
 .\setup.ps1
 ```

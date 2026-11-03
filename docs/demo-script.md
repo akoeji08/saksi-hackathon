@@ -261,5 +261,5 @@ Ini adalah tiga momen paling dramatis — refusal, konflik, injeksi — masing-m
 
 ---
 
-**Kontak:** [email kamu]
+**Kontak:** anshar@priwarsani.net
 **Repo:** https://github.com/akoeji08/saksi-hackathon

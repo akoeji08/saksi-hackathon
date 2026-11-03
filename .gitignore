@@ -1,0 +1,26 @@
+# Dependencies
+demo-video/node_modules/
+
+# Build output
+demo-video/out/*.mp4
+demo-video/out/audio/
+demo-video/out/audio_work/
+demo-video/out/audio_work2/
+
+# Keep source code, scripts, and config
+!demo-video/src/
+!demo-video/scripts/
+!demo-video/package.json
+!demo-video/tsconfig.json
+!demo-video/remotion.config.ts
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Audit log (generated at runtime)
+engine/audit.jsonl

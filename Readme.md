@@ -298,19 +298,22 @@ saksi-hackathon/
 
 ## 🎬 Demo Video
 
-**Tonton demo 7 menit:** [YouTube link — ganti setelah rekam]
+**Tonton demo video:** [YouTube — coming soon]
 
-Durasi 7 menit mencakup:
+Durasi 4.9 menit (294 detik) dengan narasi Bahasa Indonesia:
 
-1. Overview arsitektur (1 menit)
-2. Jawaban berbukti (1 menit)
-3. Refusal equivalence (1 menit)
-4. Conflict temporal (1 menit)
-5. Prompt injection defense (1 menit)
-6. Audit ledger (1 menit)
-7. Responsible AI summary (1 menit)
+1. Hook — statistik puskesmas, data sensitif, tagline SAKSI
+2. Overview arsitektur — 3 lapis, 4 trust boundary
+3. Demo: Jawaban berbukti — evidence cards, identitas terverifikasi
+4. Demo: Refusal equivalence — Cakalang vs Naga, respons identik
+5. Demo: Konflik temporal — sumber lama vs baru, resolusi dengan alasan
+6. Demo: Prompt injection defense — instruksi tersembunyi dinonaktifkan
+7. Audit ledger — metadata-only, PII disamarkan
+8. Summary — 13/13 test lulus, "Setiap jawaban punya lima saksi"
 
 Script lengkap: [`docs/demo-script.md`](./docs/demo-script.md)
+
+Video dibuat dengan Remotion (React + TypeScript). Source code: [`demo-video/`](./demo-video/)
 
 ---
 
@@ -324,7 +327,7 @@ Script lengkap: [`docs/demo-script.md`](./docs/demo-script.md)
 | Accountability sheet | [`docs/accountability.md`](./docs/accountability.md) | ✅ |
 | Test results | [`docs/test-results.md`](./docs/test-results.md) | ✅ |
 | Architecture diagram | [`docs/architecture.md`](./docs/architecture.md) | ✅ |
-| Demo video | YouTube link | ✅ |
+| Demo video | `demo-video/out/saksi-demo-final.mp4` | ✅ |
 | Product sharing | [`docs/product-sharing.md`](./docs/product-sharing.md) | ✅ |
 | Source code | Repo ini | ✅ |
 
