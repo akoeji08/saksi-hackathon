@@ -24,3 +24,6 @@ Thumbs.db
 
 # Audit log (generated at runtime)
 engine/audit.jsonl
+
+# Submission assets - generated artefacts
+submission-assets/node_modules/

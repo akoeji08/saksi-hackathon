@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>SAKSI — WorkBuddy Chat</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1400px;
+    height: 900px;
+    background: #0d1117;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #e6edf3;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .titlebar {
+    height: 52px;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .logo {
+    width: 26px; height: 26px;
+    background: linear-gradient(135deg, #00d4ff, #0090cc);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 15px; color: #050b14;
+  }
+  .title { font-size: 14px; font-weight: 600; }
+  .subtitle { font-size: 12px; color: #8b949e; }
+  .badges { margin-left: auto; display: flex; gap: 8px; }
+  .badge {
+    font-size: 11px; padding: 4px 10px;
+    background: #21262d; border: 1px solid #30363d;
+    border-radius: 12px; color: #8b949e;
+  }
+  .badge.acc { background: rgba(0,212,255,0.12); border-color: #00d4ff; color: #00d4ff; }
+
+  .chat { flex: 1; padding: 24px 32px; overflow: hidden; }
+
+  .msg { margin-bottom: 20px; display: flex; gap: 12px; }
+  .msg.user { flex-direction: row-reverse; }
+  .avatar {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .avatar.user { background: #30363d; color: #e6edf3; }
+  .avatar.ai { background: linear-gradient(135deg, #00d4ff, #0090cc); color: #050b14; }
+  .bubble {
+    max-width: 880px; border-radius: 12px;
+    padding: 14px 18px; font-size: 14px; line-height: 1.65;
+  }
+  .msg.user .bubble { background: #1f6feb; color: #fff; }
+  .msg.ai .bubble { background: #161b22; border: 1px solid #30363d; }
+
+  .query-cmd {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    background: rgba(255,255,255,0.14);
+    padding: 2px 8px; border-radius: 5px; font-size: 13.5px;
+  }
+  .evlabel { color: #58a6ff; font-size: 11px; font-weight: 700; letter-spacing: 0.6px; margin: 14px 0 7px; text-transform: uppercase; }
+  .evcard {
+    background: #0d1117; border: 1px solid #30363d; border-left: 3px solid #00d4ff;
+    border-radius: 7px; padding: 9px 13px; margin-bottom: 7px;
+    font-size: 13px; display: flex; align-items: baseline; gap: 10px;
+  }
+  .evid { font-family: 'Cascadia Code', Consolas, monospace; color: #00d4ff; font-weight: 700; font-size: 12.5px; }
+  .evtitle { color: #e6edf3; }
+  .evdate { color: #6e7681; font-size: 11.5px; margin-left: auto; }
+  .footerline {
+    margin-top: 14px; padding-top: 11px; border-top: 1px dashed #30363d;
+    font-size: 12px; color: #8b949e; font-family: 'Cascadia Code', Consolas, monospace;
+  }
+  .warn {
+    background: rgba(248,81,73,0.10); border: 1px solid #f85149; border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 14px; font-size: 13px; color: #ffb4ab;
+    line-height: 1.6;
+  }
+  .warn b { color: #ff7b72; }
+  .blocked {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    background: rgba(248,81,73,0.15); color: #ff7b72;
+    padding: 2px 7px; border-radius: 4px; font-size: 12.5px; font-weight: 700;
+  }
+  .terminal {
+    background: #010409; border: 1px solid #30363d; border-radius: 9px;
+    padding: 16px 20px; font-family: 'Cascadia Code', Consolas, monospace;
+    font-size: 12.5px; line-height: 1.75; color: #c9d1d9;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .t-dim { color: #6e7681; }
+  .t-cyan { color: #00d4ff; }
+  .t-green { color: #3fb950; }
+  .t-yellow { color: #d29922; }
+  .t-red { color: #ff7b72; }
+  .t-white { color: #e6edf3; font-weight: 600; }
+  .t-sep { color: #30363d; }
+  .refusal { color: #e6edf3; }
+  .identical {
+    display: inline-block; margin-top: 12px; padding: 6px 14px;
+    background: rgba(63,185,80,0.14); border: 1px solid #3fb950; border-radius: 8px;
+    color: #3fb950; font-size: 12.5px; font-weight: 700; letter-spacing: 0.4px;
+  }
+  .meta {
+    margin-top: 18px; padding: 11px 15px;
+    background: #0d1117; border: 1px solid #30363d; border-radius: 8px;
+    font-size: 12px; color: #8b949e;
+  }
+  .meta .k { color: #58a6ff; }
+  .divider {
+    display: flex; align-items: center; gap: 12px; margin: 22px 0;
+    color: #6e7681; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #30363d; }
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="logo">S</div>
+  <div>
+    <div class="title">SAKSI — Workplace Brain</div>
+    <div class="subtitle">WorkBuddy Desktop · Chat</div>
+  </div>
+  <div class="badges">
+    <div class="badge acc">Skill: /saksi</div>
+    <div class="badge">User: STF-005</div>
+    <div class="badge">Tencent Cloud Hackathon Indonesia 2026</div>
+  </div>
+</div>
+
+<div class="chat" id="chat"></div>
+
+</body>
+</html>
