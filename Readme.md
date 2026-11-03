@@ -326,7 +326,9 @@ Video dibuat dengan Remotion (React + TypeScript). Source code: [`demo-video/`](
 | Project description | [`docs/`](./docs/) | ✅ |
 | Accountability sheet | [`docs/accountability.md`](./docs/accountability.md) | ✅ |
 | Test results | [`docs/test-results.md`](./docs/test-results.md) | ✅ |
-| Architecture diagram | [`docs/architecture.md`](./docs/architecture.md) | ✅ |
+| Architecture diagram | [`docs/architecture.md`](./docs/architecture.md) · `submission-assets/saksi-architecture/SAKSI-Architecture-Diagram.pptx` | ✅ |
+| Cover image 16:9 | `submission-assets/SAKSI-Cover-16x9.png` | ✅ |
+| WorkBuddy conversation history | `submission-assets/shot-1..4-*.png` (4 real screen captures) | ✅ |
 | Demo video | `demo-video/out/saksi-demo-final.mp4` | ✅ |
 | Product sharing | [`docs/product-sharing.md`](./docs/product-sharing.md) | ✅ |
 | Source code | Repo ini | ✅ |
