@@ -78,17 +78,17 @@
     el.userList.innerHTML = DATA.demoUsers
       .map((id) => {
         const u = userById(id);
-        const groups = (u.groups || []).slice(0, 3).join(" · ");
+        const groups = (u.groups || []).join(" · ");
         return `
-          <button class="user${id === currentUser ? " active" : ""}" data-user="${u.id}" type="button">
+          <button class="user${id === currentUser ? " active" : ""}" data-user="${u.id}" type="button"
+                  title="${escHtml(u.id + " · " + u.role + " · " + groups)}">
             <div class="user-top">
               <span class="user-id">${u.id}</span>
               <span class="user-name">${escHtml(u.name)}</span>
             </div>
-            <div class="user-role">${escHtml(u.role)}</div>
-            <div class="user-meta">
+            <div class="user-sub">
+              <span class="user-role">${escHtml(u.role)}</span>
               <span class="chip clr ${u.clearance}">${u.clearance}</span>
-              <span class="chip">${escHtml(groups)}</span>
             </div>
           </button>`;
       })
@@ -294,7 +294,7 @@
     el.gateNote.textContent = "Ajukan pertanyaan untuk melihat gate bekerja.";
     el.gateNote.classList.remove("warn");
     el.input.value = "";
-    el.input.focus();
+    el.input.focus({ preventScroll: true });
   }
 
   // ---------- init ----------
@@ -313,5 +313,6 @@
   el.gateScanned.textContent = "—";
   el.gateAllowed.textContent = "—";
 
-  el.input.focus();
+  // Do not steal focus on load: on a landing page this scroll-jumps past the hero.
+  // Focus is given only when the user interacts with the demo.
 })();

@@ -1,60 +1,69 @@
-# SAKSI — Live Demo
+# SAKSI — situs publik
 
-A static, dependency-free demo of the SAKSI engine that runs **entirely in the browser**.
-No server, no LLM call, no network request after the page loads — the deterministic
-pipeline from `engine/ask.mjs` is ported 1:1 to JavaScript and evaluated locally.
+Satu halaman statis yang menjadi wajah proyek: narasi produk, demo engine yang
+benar-benar berjalan, dan batasan yang disebut terbuka.
 
-**Why it exists:** the real product is a WorkBuddy Desktop skill + Node CLI, which judges
-cannot click. This page lets anyone try the permission gate, evidence cards, refusal
-equivalence, conflict resolution and injection defence in seconds.
+**Tidak ada build step, tidak ada dependensi, tidak ada request jaringan setelah
+halaman dimuat.**
 
-## Files
-
-| File | Role |
-|:---|:---|
-| `index.html` | Layout: identity sidebar, chat, audit ledger |
-| `styles.css` | Navy/cyan theme matching the cover and demo video |
-| `engine.js` | Port of `engine/ask.mjs` (v5) — gate, retrieval, scoring, quality gate, conflict, injection, PII masking, composer |
-| `data.js` | **Generated** — the JSON datasets inlined by `tools/build_data.py` |
-| `app.js` | UI wiring, rendering, audit entries |
-| `test_engine.mjs` | Headless validation of the port against expected behaviour |
-
-## Regenerate the data
-
-`data/` stays the single source of truth. After editing any dataset:
-
-```bash
-python tools/build_data.py        # rewrites live-demo/data.js
-cd live-demo && node test_engine.mjs
+```
+index.html    seluruh struktur & konten (12 bagian)
+styles.css    sistem desain (gelap, serif editorial, aksen cyan)
+site.js       navigasi, scroll-story 01—04, tab skenario, pipeline 10 tahap
+demo.js       UI demo (identitas, chat, gate, audit ledger)
+engine.js     port 1:1 dari engine/ask.mjs v5
+data.js       dihasilkan dari data/*.json oleh tools/build_data.py
+test_engine.mjs   validasi headless, 10/10 lulus
 ```
 
-## What the demo proves
-
-Switch the identity on the left and ask the **same** question:
-
-| Identity | Clearance | `Apa itu Proyek Cakalang?` |
-|:---|:---|:---|
-| STF-005 Ns. Dewi Lestari | internal | refused — 21 blocked, 0 allowed |
-| STF-001 dr. Fatimah Rahmawati | top_secret_medical | answered — 1 blocked, 5 allowed, 3 evidence cards |
-
-The gate counters are measured **before** scoring, which is the point of trust
-boundary B3: denied records never reach the answer composer, let alone an LLM context.
-
-Other scenarios worth clicking:
-
-- **`Apa isi template surat rujukan?`** — an embedded instruction in DOC-007 is replaced
-  with `[INSTRUKSI TERTANAM DIABAIKAN]` and the evidence card is flagged.
-- **`Jam berapa poli buka?`** — DOC-001 (outdated) vs CHAT-001 (active); the newer source
-  wins and the reasoning is stated.
-- **`Apa SOP deteksi dini gangguan jiwa?`** — DOC-016 appears only for identities that
-  hold the `jiwa` or `dokter` group; others fall back to accessible documents.
-
-## Local preview
-
-Any static server works, e.g.:
+## Menjalankan lokal
 
 ```bash
-python -m http.server 8080 --directory live-demo
+cd live-demo
+python -m http.server 8080
+# buka http://localhost:8080
 ```
 
-All patient data is fictitious and was created for the hackathon.
+Membuka `index.html` langsung lewat `file://` juga bekerja.
+
+## Urutan bagian
+
+| # | Bagian | Isi |
+|:--:|:---|:---|
+| 1 | Hero | Tesis, metrik, kartu bukti contoh |
+| 2 | Masalah | Mengapa AI generik gagal di puskesmas |
+| 3 | Lima Saksi | S · A · K · S · I sebagai jaminan yang ditegakkan di kode |
+| 4 | Story 01—04 | Identitas → gerbang → bukti → jejak (horizontal scroll) |
+| 5 | Demo | Engine asli di browser, ganti identitas dan bandingkan |
+| 6 | Cara kerja | 10 tahap pipeline, dapat diklik per tahap |
+| 7 | Trust boundary | B1—B4: mekanisme, yang dicegah, risiko bila gagal |
+| 8 | Skenario | 4 tab: bukti, penolakan, injeksi, konflik |
+| 9 | Hasil uji | 13/20 lulus, 0 gagal, critical failure check |
+| 10 | Pasang | 3 langkah, 5 menit |
+| 11 | Status | Siap / butuh setup / di luar cakupan |
+| 12 | FAQ | 7 pertanyaan, termasuk yang tidak nyaman |
+
+## Demo yang paling menunjukkan
+
+Tanyakan **“Apa itu Proyek Cakalang?”** sebagai **STF-005** (perawat):
+ditolak, gate mencatat **21 diblokir / 0 lolos ACL**.
+
+Lalu pilih **STF-001** (Kepala Puskesmas) dan tanyakan hal yang sama:
+dijawab dengan **3 kartu bukti**, gate menjadi **1 diblokir / 5 lolos**.
+
+Pertanyaan identik, hasil berbeda — itu inti *permission-first*.
+
+## Regenerasi data
+
+`data.js` tidak diedit manual. Ubah `data/*.json`, lalu:
+
+```bash
+python tools/build_data.py
+```
+
+## Catatan
+
+- Seluruh data fiktif.
+- Engine deterministik; tidak ada LLM di jalur jawaban.
+- Tidak ada analytics, tidak ada cookie pihak ketiga. Font dimuat dari Google
+  Fonts dengan fallback sistem (Georgia / system-ui) bila offline.
