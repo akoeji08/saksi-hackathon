@@ -3,8 +3,8 @@ import puppeteer from "puppeteer-core";
 
 const CHROME =
   "C:/saksi-hackathon/demo-video/node_modules/.remotion/chrome-headless-shell/win64/chrome-headless-shell-win64/chrome-headless-shell.exe";
-const URL = "file:///C:/saksi-hackathon/live-demo/index.html";
-const OUT = "C:/saksi-hackathon/live-demo";
+const URL = process.env.SITE_URL || "file:///C:/saksi-hackathon/live-demo/index.html";
+const OUT = process.env.OUT_DIR || "C:/saksi-hackathon/live-demo";
 
 const browser = await puppeteer.launch({
   executablePath: CHROME,
