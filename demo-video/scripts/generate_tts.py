@@ -20,11 +20,11 @@ VOLUME = "+0%"
 # Each narration is timed to fit within the scene's frame duration at 30fps
 NARRATIONS = {
     "scene1": {
-        "text": """Puskesmas Tamalanrea Jaya punya dua puluh dua pegawai, dua Pustu, delapan Posyandu, dan seratus dua puluh pasien per hari. Informasi mereka tersebar di WhatsApp, Drive, task board, dan SIMPUS. AI yang bisa membaca semuanya, bisa membocorkan semuanya. Data HIV, TB, jiwa, dan KLB Hepatitis A tidak boleh jatuh ke tangan yang salah. SAKSI adalah jawabannya. Workplace brain yang bisa membuktikan jawabannya, dan berani menolak.""",
+        "text": """Di puskesmas, informasi tidak tinggal di satu tempat. Jam poli ada di grup WhatsApp. Stok obat di spreadsheet. SOP di Drive Dinas. Status pasien di SIMPUS. Model bahasa yang membaca semuanya, bisa membocorkan semuanya. Dan satu kebocoran status HIV bukan bug. Itu insiden. SAKSI dibangun dari satu gagasan sederhana. Setiap jawaban harus punya saksi. Sumbernya, izinnya, penolakannya, dan jejaknya.""",
         "frames": 600,
     },
     "scene2": {
-        "text": """SAKSI dibangun di atas tiga lapis. WorkBuddy sebagai antarmuka. Skill wrapper yang membaca identitas dari file. Dan engine Node.js yang deterministik. Ada empat trust boundary. Pertama, skill dipanggil berdasarkan nama, bukan keputusan LLM. Kedua, identitas dari file, bukan dari prompt. Ketiga, dan ini yang paling penting, dokumen terlarang tidak pernah masuk ke konteks LLM. Bukan hanya disembunyikan di UI, tapi benar-benar tidak diambil oleh engine.""",
+        "text": """Perhatikan dua percakapan ini. Pertanyaan yang sama persis. Apa itu Proyek Cakalang. Yang pertama, Ns. Dewi, perawat dengan clearance internal. Sebelum satu dokumen pun dibaca, engine memeriksa izin. Empat puluh dua dokumen dan chat dipindai. Dua puluh satu diblokir. Nol yang lolos. Jawabannya, saya tidak menemukan informasi yang dapat saya akses. Yang kedua, dr. Fatimah, kepala puskesmas. Pertanyaan yang sama. Hanya satu diblokir, lima lolos. Jawaban lengkap, dengan tiga kartu bukti. Pertanyaan identik, hasil berbeda. Bukan karena modelnya menolak menjawab, tapi karena izin diperiksa sebelum retrieval.""",
         "frames": 900,
     },
     "scene3": {
@@ -48,7 +48,7 @@ NARRATIONS = {
         "frames": 750,
     },
     "scene8": {
-        "text": """SAKSI lulus tiga belas dari tiga belas test yang dijalankan. Nol kebocoran data terbatas. Nol eksekusi tanpa approval. Semua lima aturan accountable AI terbukti secara deterministik. SAKSI bukan chatbot yang pintar menjawab. SAKSI adalah agen yang bisa dipercaya. Karena menunjukkan sumber, menolak dengan aman, dan meninggalkan jejak. Di puskesmas, kepercayaan bukan fitur tambahan. Kepercayaan adalah syarat. Setiap jawaban punya lima saksi.""",
+        "text": """SAKSI lulus tiga belas dari tiga belas uji yang dijalankan. Nol kebocoran data terbatas. Nol eksekusi tanpa persetujuan. Dan sekarang memasangnya tidak perlu terminal. Paket skill sudah mandiri. Engine, dataset, dan aturan izin ikut di dalamnya. Buka Expert Center, cari SAKSI, tambahkan ke ahli Anda. Satu klik, dan seluruh engine berjalan di mesin Anda. Tanpa API key, tanpa server. Di puskesmas, kepercayaan bukan fitur tambahan. Kepercayaan adalah syarat. Setiap jawaban punya lima saksi.""",
         "frames": 450,
     },
 }

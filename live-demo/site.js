@@ -226,6 +226,48 @@
   }
 
   /* ---------------------------------------------------------
+     KARTU AHLI — tombol pasang + prompt pintasan
+     --------------------------------------------------------- */
+  const cta = document.getElementById("ec-cta");
+  const fine = document.getElementById("ec-fine");
+
+  if (cta) {
+    cta.addEventListener("click", () => {
+      const launch = (cta.dataset.launch || "").trim();
+
+      // Kalau tautan peluncuran sudah dipasang, itu jalur tercepat:
+      // satu klik membuka kartu ahli yang sama di dalam WorkBuddy.
+      if (launch) {
+        window.open(launch, "_blank", "noopener");
+        return;
+      }
+
+      // Belum ada tautan: jelaskan jalur aslinya, jangan pura-pura memasang.
+      cta.classList.add("is-done");
+      cta.textContent = "Tersedia di Ahli Saya";
+      if (fine) {
+        fine.innerHTML =
+          "Di WorkBuddy: buka <b>Ahli</b> &rarr; cari <b>SAKSI</b> &rarr; tombol yang sama.";
+        fine.hidden = false;
+      }
+    });
+  }
+
+  document.querySelectorAll(".ec-prompt").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const q = btn.dataset.q;
+      const input = document.getElementById("queryInput");
+      const form = document.getElementById("askForm");
+      const demo = document.getElementById("demo");
+      if (!q || !input || !form) return;
+
+      if (demo) demo.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      input.value = q;
+      form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true }));
+    });
+  });
+
+  /* ---------------------------------------------------------
      SCROLL REVEAL (subtle, safe)
      --------------------------------------------------------- */
   if (!reduceMotion && "IntersectionObserver" in window) {

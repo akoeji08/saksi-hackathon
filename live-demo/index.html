@@ -773,45 +773,94 @@
   <div class="shell">
     <header class="sec-head">
       <p class="kicker">Pasang</p>
-      <h2>Tiga langkah. <em>Lima menit.</em></h2>
+      <h2>Satu klik. <em>Langsung jalan.</em></h2>
       <p class="sec-lede">
-        Butuh Node.js 20+ dan WorkBuddy Desktop 5.8.4+. Tidak ada API key, tidak ada
-        layanan berbayar, tidak ada database.
+        Tidak ada terminal, tidak ada <code>git clone</code>, tidak ada API key.
+        SAKSI dipasang sebagai Ahli di WorkBuddy — buka, klik, tanya.
       </p>
     </header>
 
-    <div class="steps">
-      <article class="step">
-        <span class="step-n">01</span>
-        <h3>Clone dan uji engine</h3>
-        <p>Engine berjalan mandiri di terminal — bisa diperiksa sebelum menyentuh WorkBuddy.</p>
-        <pre><code>git clone https://github.com/akoeji08/saksi-hackathon
-cd saksi-hackathon
-$env:BRAIN_USER = "STF-005"
-node engine/ask.mjs --query "stok Amoksisilin 500mg"</code></pre>
+    <div class="install">
+      <!-- Kartu ahli: persis seperti yang muncul di WorkBuddy -->
+      <article class="expert-card" aria-label="Kartu Ahli SAKSI">
+        <div class="ec-head">
+          <img class="ec-avatar" src="assets/saksi-expert.png" alt="Avatar SAKSI" width="56" height="56">
+          <div class="ec-id">
+            <h3>SAKSI</h3>
+            <p>Ahli &middot; Kepatuhan &amp; Keamanan</p>
+          </div>
+          <span class="ec-state">Pratinjau</span>
+        </div>
+
+        <p class="ec-desc">
+          Mesin keputusan berbasis bukti untuk puskesmas. Memeriksa izin sebelum
+          mengambil data, menempelkan sumber pada setiap jawaban, menolak tanpa
+          membocorkan keberadaan data, dan mencatat audit tanpa menyimpan isi.
+        </p>
+
+        <div class="ec-tags">
+          <span>Permission-aware</span>
+          <span>Bukti &amp; sitasi</span>
+          <span>Jejak audit</span>
+        </div>
+
+        <div class="ec-prompts">
+          <p class="ec-label">Coba tanya saya</p>
+          <button type="button" class="ec-prompt" data-q="Berapa stok Amoksisilin 500mg sekarang?">Berapa stok Amoksisilin 500mg sekarang?</button>
+          <button type="button" class="ec-prompt" data-q="Apa itu Proyek Cakalang?">Apa itu Proyek Cakalang?</button>
+        </div>
+
+        <button type="button" class="ec-cta" id="ec-cta" data-launch="">Tambahkan ke Ahli Saya</button>
+        <p class="ec-fine" id="ec-fine" hidden></p>
       </article>
 
-      <article class="step">
-        <span class="step-n">02</span>
-        <h3>Pasang skill</h3>
-        <p>Salin folder skill ke direktori skill WorkBuddy, lalu buat file identitas Anda.</p>
-        <pre><code>$d = "$env:USERPROFILE\.workbuddy-ai\skills"
-Copy-Item -Recurse skill "$d\saksi"
-Copy-Item "$d\saksi\current-user.example.json" `
-          "$d\saksi\current-user.json"</code></pre>
-      </article>
+      <!-- Tiga langkah, tanpa terminal -->
+      <ol class="install-steps">
+        <li>
+          <span class="is-n">1</span>
+          <div>
+            <h4>Buka WorkBuddy</h4>
+            <p>Klik <b>Ahli</b> di bilah kiri, lalu cari <b>SAKSI</b>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="is-n">2</span>
+          <div>
+            <h4>Tekan “Tambahkan ke Ahli Saya”</h4>
+            <p>Skill, data contoh, dan skrip ikut terpasang di dalam paket. Tidak ada
+              yang perlu diunduh terpisah.</p>
+          </div>
+        </li>
+        <li>
+          <span class="is-n">3</span>
+          <div>
+            <h4>Langsung tanya</h4>
+            <p>Ketik pertanyaan seperti di chat biasa. SAKSI memilih identitas,
+              menjalankan gerbang izin, lalu menjawab dengan sumber.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
 
-      <article class="step">
-        <span class="step-n">03</span>
-        <h3>Tanya</h3>
-        <p>Buka chat baru di WorkBuddy dan panggil skill dengan namanya.</p>
-        <pre><code>/saksi Berapa stok Amoksisilin 500mg sekarang?</code></pre>
-        <p class="step-note">
-          <b>Untuk juri:</b> tidak perlu memasang apa pun —
+    <details class="dev-path">
+      <summary>Jalur pengembang — jalankan engine langsung dari terminal</summary>
+      <div class="dev-body">
+        <p>
+          Engine bersifat mandiri dan bisa diperiksa tanpa WorkBuddy. Butuh Node.js 20+.
+          Ini opsional: juri tidak perlu memasang apa pun, karena
           <a href="#demo">demo di atas</a> menjalankan engine yang sama di browser.
         </p>
-      </article>
-    </div>
+        <pre><code>git clone https://github.com/akoeji08/saksi-hackathon
+cd saksi-hackathon
+node skill/scripts/set-user.mjs STF-005
+node skill/scripts/ask.mjs --query "Apa itu Proyek Cakalang?"</code></pre>
+        <p class="dev-note">
+          Ganti <code>STF-005</code> dengan <code>STF-001</code> untuk melihat jawaban
+          yang sama berubah dari <b>BUKTI BELUM CUKUP</b> menjadi <b>TERVERIFIKASI</b>
+          dengan tiga sumber.
+        </p>
+      </div>
+    </details>
   </div>
 </section>
 

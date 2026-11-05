@@ -18,6 +18,14 @@ demo-video/out/audio_work2/
 .DS_Store
 Thumbs.db
 
+# Runtime state — regenerated on first query
+audit.jsonl
+skill/audit.jsonl
+
+# Local visual-check artifacts
+live-demo/_check_*.png
+submission-assets/_check_*.png
+
 # IDE
 .vscode/
 .idea/
@@ -27,3 +35,7 @@ engine/audit.jsonl
 
 # Submission assets - generated artefacts
 submission-assets/node_modules/
+
+# Rendered video — rebuild with demo-video/scripts/merge_audio_natural.sh
+submission-assets/*.mp4
+demo-video/out/frames/

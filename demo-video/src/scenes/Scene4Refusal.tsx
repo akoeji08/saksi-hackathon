@@ -212,7 +212,6 @@ export const Scene4Refusal: React.FC = () => {
       <div
         style={{
           opacity: identicalOpacity,
-          transform: `scale(${identicalScale})`,
           position: "absolute",
           bottom: 60,
           left: "50%",

@@ -1,14 +1,19 @@
 // ask.mjs — SAKSI Engine v5
-// Path: C:\Users\ansha\Documents\saksi-engine\brain\scripts\ask.mjs
 // Tanggung jawab: identitas, permission gate, retrieval terfilter,
 //                 quality gate, conflict detection, injection defense,
 //                 audit ledger, PII masking.
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const DATA_DIR = 'C:\\Users\\ansha\\Documents\\saksi-engine\\data';
-const AUDIT_PATH = 'C:\\Users\\ansha\\Documents\\saksi-engine\\audit.jsonl';
+// Portabel: path diturunkan dari lokasi file ini, bukan path absolut mesin
+// pengembang. Bekerja di root repo (engine/ + data/) maupun di paket skill.
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(HERE, '..');
+
+const DATA_DIR = path.join(ROOT, 'data');
+const AUDIT_PATH = process.env.SAKSI_AUDIT_PATH || path.join(ROOT, 'audit.jsonl');
 const ENGINE_VERSION = 'v5';
 
 // =========================================================
@@ -235,13 +240,16 @@ function scoreRecord(record, terms) {
 const terms = extractTerms(QUERY);
 const candidates = [];
 let injectionCount = 0;
+// Boundary B3 counters: every doc/chat is scanned, blocked ones never reach scoring.
+let scannedDocs = 0, scannedChats = 0, blockedDocs = 0, blockedChats = 0;
 
 for (const d of drugs) {
   const r = scoreRecord(d, terms);
   if (r.score > 0) candidates.push({ ...d, _type: 'drug', _score: r.score, _criticalMatches: r.criticalMatches });
 }
 for (const d of docs) {
-  if (!canAccess(d, user)) continue;
+  scannedDocs++;
+  if (!canAccess(d, user)) { blockedDocs++; continue; }
   const r = scoreRecord(d, terms);
   if (r.score > 0) {
     const inj = detectInjection(d.content || '');
@@ -250,7 +258,8 @@ for (const d of docs) {
   }
 }
 for (const c of chats) {
-  if (!canAccess(c, user)) continue;
+  scannedChats++;
+  if (!canAccess(c, user)) { blockedChats++; continue; }
   const r = scoreRecord(c, terms);
   if (r.score > 0) {
     const inj = detectInjection(c.content || '');
@@ -258,6 +267,13 @@ for (const c of chats) {
     candidates.push({ ...c, _type: 'chat', _score: r.score, _criticalMatches: r.criticalMatches, _injection: inj.contains, _sanitized: inj.sanitized });
   }
 }
+
+const gate = {
+  blockedDocs, blockedChats,
+  blockedTotal: blockedDocs + blockedChats,
+  scanned: scannedDocs + scannedChats,
+  allowed: candidates.length
+};
 
 // =========================================================
 // SECTION 9: Quality gate
@@ -287,7 +303,7 @@ if (insufficient) {
     status: 'BUKTI_BELUM_CUKUP',
     answer: 'Saya tidak menemukan informasi yang dapat saya akses untuk pertanyaan itu. Silakan hubungi pemilik topik terkait.',
     sources: [], warnings: [],
-    _meta: { user: user.id, query: QUERY, sources_considered: 0, audit_id: auditId }
+    _meta: { user: user.id, query: QUERY, sources_considered: 0, gate, audit_id: auditId }
   }, null, 2));
   process.exit(0);
 }
@@ -359,7 +375,7 @@ if (conflict) {
   console.log(JSON.stringify({
     status: 'KONFLIK', answer: answerText, sources: sources,
     warnings: ['CONFLICT_RESOLVED_BY_RECENCY'],
-    _meta: { user: user.id, query: QUERY, sources_considered: 2,
+    _meta: { user: user.id, query: QUERY, sources_considered: 2, gate,
       conflict_type: conflict.type, conflict_resolved: true,
       resolution_rule: 'newer_source_wins', audit_id: auditId }
   }, null, 2));
@@ -443,6 +459,6 @@ console.log(JSON.stringify({
   answer: finalAnswer,
   sources: sources,
   warnings: warnings,
-  _meta: { user: user.id, query: QUERY, sources_considered: displayedTop.length,
+  _meta: { user: user.id, query: QUERY, sources_considered: displayedTop.length, gate,
     injections_blocked: injectionCount, audit_id: auditId }
 }, null, 2));

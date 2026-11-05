@@ -14,16 +14,18 @@ OUT_DIR="C:/saksi-hackathon/demo-video/out"
 
 mkdir -p "$WORK_DIR"
 
-# Scene durations in seconds (frames / 30fps) - matches new Root.tsx
+# Scene durations in seconds (frames / 30fps) - must match SaksiDemo.tsx exactly.
+# Precise (non-rounded) values so accumulated padding drift stays under one frame.
 declare -A SCENE_DUR
-SCENE_DUR[1]=35.0   # 1050 frames
-SCENE_DUR[2]=38.0   # 1140 frames
-SCENE_DUR[3]=35.0   # 1050 frames
-SCENE_DUR[4]=35.0   # 1050 frames
-SCENE_DUR[5]=36.0   # 1080 frames
-SCENE_DUR[6]=44.0   # 1320 frames
-SCENE_DUR[7]=34.0   # 1020 frames
-SCENE_DUR[8]=37.0   # 1110 frames
+SCENE_DUR[1]=37.600000   # 1128 frames
+SCENE_DUR[2]=53.766667   # 1613 frames
+SCENE_DUR[3]=34.133333   # 1024 frames
+SCENE_DUR[4]=34.600000   # 1038 frames
+SCENE_DUR[5]=35.200000   # 1056 frames
+SCENE_DUR[6]=43.233333   # 1297 frames
+SCENE_DUR[7]=33.900000   # 1017 frames
+SCENE_DUR[8]=43.466667   # 1304 frames
+# Total = 315.9s = 9477 frames
 
 echo "=== Step 1: Pad each audio with silence to match scene duration (NO speedup) ==="
 

@@ -1,18 +1,41 @@
 ## 🎓 Untuk Juri / Reviewer
 
-Setup 3 langkah, 2 menit.
+### Cara tercepat — satu klik, tanpa terminal
 
-### Langkah 1 — Clone dan setup
+SAKSI dikemas sebagai **Ahli WorkBuddy**. Skill, dataset, dan engine ikut di
+dalam paketnya, jadi tidak ada yang perlu di-clone atau diunduh terpisah.
+
+1. Buka WorkBuddy Desktop → **Ahli** di bilah kiri.
+2. Cari **SAKSI**.
+3. Tekan **Tambahkan ke Ahli Saya**.
+4. Langsung tanya, seperti chat biasa:
+
+   ```
+   Berapa stok Amoksisilin 500mg sekarang?
+   ```
+
+Tidak perlu Node.js, Git, atau API key. Runtime Node sudah menyatu dengan
+WorkBuddy, dan engine beserta dataset ikut di dalam paket Ahli.
+
+Kalau kartu ahli belum tersedia di galeri, pasang dari file paket:
+
+```
+submission-assets/expert/saksi.zip
+```
+
+---
+
+### Cara alternatif — jalur pengembang (butuh Node.js + Git)
 
 Buka PowerShell, jalankan:
 
 ```powershell
 git clone https://github.com/akoeji08/saksi-hackathon.git
 cd saksi-hackathon
-.\setup.ps1
+.\engine\setup.ps1
 ```
 
-Script `setup.ps1` akan otomatis:
+Script `engine/setup.ps1` akan otomatis:
 
 - Cek Node.js terpasang
 - Copy skill ke `~/.workbuddy-ai/skills/saksi/`
@@ -23,7 +46,7 @@ Jika PowerShell menolak script, jalankan dulu:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\setup.ps1
+.\engine\setup.ps1
 ```
 
 ### Langkah 2 — Buka WorkBuddy
@@ -48,13 +71,17 @@ Dijawab untuk: STF-005
 
 ### Langkah 3 — Ganti user (opsional, untuk demo multi-role)
 
-Untuk melihat perbedaan akses, edit file:
+Cara termudah, lewat skrip identitas:
 
-```
-~/.workbuddy-ai/skills/saksi/current-user.json
+```powershell
+node "$env:USERPROFILE\.workbuddy-ai\skills\saksi\scripts\set-user.mjs"         # lihat daftar
+node "$env:USERPROFILE\.workbuddy-ai\skills\saksi\scripts\set-user.mjs" STF-001 # ganti
 ```
 
-Ubah `user_id` menjadi salah satu:
+Atau edit file `~/.workbuddy-ai/skills/saksi/current-user.json` secara langsung.
+
+Identitas sengaja tidak bisa dipilih oleh model dari dalam chat — itu batas B2:
+model tidak boleh menentukan siapa yang bertanya.
 
 | User ID | Nama | Role | Akses |
 |:---|:---|:---|:---|
@@ -80,9 +107,9 @@ Setelah ubah, **tutup WorkBuddy, buka lagi, chat baru** agar perubahan terbaca.
 
 | Masalah | Solusi |
 |:---|:---|
-| `node` tidak dikenali | Install Node.js dari nodejs.org |
+| `node` tidak dikenali | Pakai jalur satu klik (tidak butuh Node), atau install Node.js dari nodejs.org |
 | Skill tidak terpanggil | Gunakan `/saksi` eksplisit, bukan query bebas |
-| `current-user.json` tidak ada | Jalankan `.\setup.ps1` atau copy dari `current-user.example.json` |
+| `current-user.json` tidak ada | Jalankan `.\engine\setup.ps1` atau copy dari `current-user.example.json` |
 | `audit.jsonl` kosong | Normal, akan terisi setelah query pertama |
 | Output bukan JSON | Cek path engine di `skill/scripts/ask.mjs` |
 

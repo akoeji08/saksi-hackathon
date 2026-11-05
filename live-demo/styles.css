@@ -1105,8 +1105,134 @@ section[id], #atas{ scroll-margin-top:74px; }
 .honest b{ color:var(--text-2); }
 
 /* ============================================================
-   PASANG
+   PASANG — satu klik (kartu ahli) + jalur pengembang
    ============================================================ */
+.install{
+  display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);
+  gap:28px; align-items:start;
+}
+
+/* ---- kartu ahli, meniru modal WorkBuddy ---- */
+.expert-card{
+  border:1px solid var(--edge); border-radius:14px;
+  background:linear-gradient(180deg, var(--panel-2), var(--panel));
+  padding:22px; min-width:0;
+  box-shadow:0 24px 60px -32px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.015) inset;
+}
+.ec-head{ display:flex; align-items:center; gap:12px; }
+.ec-avatar{
+  width:56px; height:56px; border-radius:13px; flex:0 0 auto;
+  border:1px solid var(--edge); background:var(--panel-2); object-fit:cover;
+}
+.ec-id{ flex:1; min-width:0; }
+.ec-id h3{
+  margin:0; font-size:17px; font-weight:650; letter-spacing:-.015em; color:var(--text);
+}
+.ec-id p{
+  margin:2px 0 0; font-size:11px; letter-spacing:.02em; color:var(--dim);
+}
+.ec-state{
+  flex:0 0 auto; font-family:var(--mono); font-size:9px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--dim);
+  border:1px solid var(--edge); background:rgba(255,255,255,.035);
+  border-radius:999px; padding:3px 9px;
+}
+.ec-desc{
+  margin:16px 0 0; font-size:12.5px; line-height:1.72; color:var(--text-2);
+}
+.ec-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.ec-tags span{
+  font-size:10px; letter-spacing:.02em; color:var(--dim);
+  border:1px solid var(--edge-soft); border-radius:999px; padding:3px 9px;
+  background:rgba(255,255,255,.02);
+}
+.ec-prompts{ margin-top:18px; display:flex; flex-direction:column; gap:6px; }
+.ec-label{
+  margin:0 0 2px; font-family:var(--mono); font-size:9px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--dim-2);
+}
+.ec-prompt{
+  display:block; width:100%; text-align:left; cursor:pointer;
+  font-family:var(--sans); font-size:11.5px; color:var(--text-2);
+  background:rgba(255,255,255,.028); border:1px solid var(--edge-soft);
+  border-radius:8px; padding:9px 12px; transition:.16s ease;
+}
+.ec-prompt:hover{ border-color:var(--edge); color:var(--text); background:rgba(255,255,255,.05); }
+.ec-prompt:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+.ec-cta{
+  margin-top:16px; width:100%; cursor:pointer;
+  font-family:var(--sans); font-size:13px; font-weight:600; letter-spacing:-.005em;
+  color:#04121a; background:var(--cyan); border:1px solid var(--cyan);
+  border-radius:9px; padding:12px 16px; transition:.18s ease;
+}
+.ec-cta:hover{ background:#54d6f7; border-color:#54d6f7; box-shadow:0 10px 30px -12px rgba(53,200,240,.8); }
+.ec-cta:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+.ec-cta.is-done{
+  background:rgba(63,185,80,.14); border-color:rgba(63,185,80,.4);
+  color:var(--green); cursor:default; box-shadow:none;
+}
+.ec-fine{
+  margin:10px 0 0; font-size:10.5px; line-height:1.65; color:var(--dim-2);
+  text-align:center;
+}
+.ec-fine b{ color:var(--text-2); font-weight:600; }
+
+/* ---- tiga langkah tanpa terminal ---- */
+.install-steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.install-steps li{
+  display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--edge-soft);
+  min-width:0;
+}
+.install-steps li:first-child{ padding-top:0; }
+.install-steps li:last-child{ border-bottom:0; padding-bottom:0; }
+.is-n{
+  flex:0 0 auto; width:24px; height:24px; border-radius:50%;
+  display:grid; place-items:center;
+  font-family:var(--mono); font-size:10px; color:var(--cyan);
+  border:1px solid rgba(53,200,240,.34); background:var(--cyan-glow);
+}
+.install-steps h4{
+  margin:1px 0 5px; font-size:13.5px; font-weight:600; letter-spacing:-.008em; color:var(--text);
+}
+.install-steps p{ margin:0; font-size:12px; line-height:1.7; color:var(--dim); }
+.install-steps b{ color:var(--text-2); font-weight:600; }
+
+/* ---- jalur pengembang (opsional) ---- */
+.dev-path{
+  margin-top:26px; border:1px solid var(--edge-soft); border-radius:var(--r);
+  background:rgba(0,0,0,.22); min-width:0;
+}
+.dev-path > summary{
+  cursor:pointer; padding:14px 18px; list-style:none;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--dim); transition:.16s ease;
+}
+.dev-path > summary::-webkit-details-marker{ display:none; }
+.dev-path > summary::before{ content:"▸ "; color:var(--cyan); }
+.dev-path[open] > summary::before{ content:"▾ "; }
+.dev-path > summary:hover{ color:var(--text-2); }
+.dev-path > summary:focus-visible{ outline:2px solid var(--cyan); outline-offset:-2px; }
+.dev-body{ padding:0 18px 18px; min-width:0; }
+.dev-body > p{ margin:0 0 12px; font-size:12px; line-height:1.7; color:var(--dim); }
+.dev-body a{ color:var(--cyan); text-decoration:none; border-bottom:1px solid rgba(53,200,240,.3); }
+.dev-body a:hover{ border-color:var(--cyan); }
+.dev-body pre{
+  margin:0 0 12px; padding:13px 14px; border-radius:7px;
+  background:rgba(0,0,0,.5); border:1px solid var(--edge-soft);
+  overflow-x:auto; max-width:100%; min-width:0;
+}
+.dev-body pre code{
+  font-size:10px; line-height:1.95; color:var(--text-2);
+  white-space:pre; display:block;
+}
+.dev-note{ margin:0 !important; font-size:11.5px !important; color:var(--dim-2) !important; }
+.dev-note b{ color:var(--text-2); }
+.dev-note code{ color:var(--cyan); }
+
+@media (max-width:900px){
+  .install{ grid-template-columns:1fr; gap:22px; }
+}
+
 .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
 .step{
   border:1px solid var(--edge-soft); border-radius:var(--r);

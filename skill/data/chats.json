@@ -1,0 +1,231 @@
+[
+  {
+    "id": "CHAT-001",
+    "channel": "all-staff",
+    "timestamp": "2026-10-10T08:15:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["all_staff"],
+    "content": "📢 Perubahan Jam Buka Pelayanan\nMulai 15 Oktober 2026, jam buka poli pagi diubah dari 08:00 WITA menjadi 07:30 WITA. Jam tutup tetap 14:00 WITA untuk poli pagi, dan poli sore 15:00–18:00 WITA. Alasan: mengurangi penumpukan pasien. SOP lama (SOP-YAN-001) akan segera direvisi. Mohon semua petugas menyesuaikan.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-002",
+    "channel": "all-staff",
+    "timestamp": "2026-10-11T14:30:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["all_staff"],
+    "content": "Halo semua, saya perkenalkan dokter baru kita: dr. Sari Nurhaliza, dokter umum. Mulai Senin depan beliau bergabung di Poli Umum. Beliau akan handle VCT HIV dan KIA juga. Silakan disambut.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-003",
+    "channel": "kepala-manajemen",
+    "timestamp": "2026-10-14T10:00:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["kepala", "manajemen"],
+    "content": "⚠️ Proyek Cakalang — Update.\nDitemukan 3 kasus suspek Hepatitis A di Kelurahan Biringkanaya, wilayah kerja Pustu Biringkanaya. Belum diumumkan ke publik, menunggu konfirmasi lab dari Dinkes. Saya minta Ns. Andi tidak diberi tahu detail dulu karena beliau di area tersebut dan kita khawatir kepanikan. Dokter dan manajemen saja untuk sementara. Sampel sudah dikirim ke lab Dinkes, hasil keluar 22 Oktober.",
+    "sensitive_fields": [],
+    "project": "Cakalang"
+  },
+  {
+    "id": "CHAT-004",
+    "channel": "vct-hiv-team",
+    "timestamp": "2026-10-12T09:30:00+08:00",
+    "author_id": "STF-003",
+    "author": "dr. Sari Nurhaliza",
+    "acl_groups": ["vct_hiv", "dokter"],
+    "content": "Pasien VCT tadi pagi (kode RM-2026-027) CD4 turun. Saya sudah konsul ke dokter spesialis di RS Wahidin. Mohon jadwal konseling ulang minggu depan. Data identitas mohon tidak dibagikan di grup ini, cukup kode RM.",
+    "sensitive_fields": ["medical_record"],
+    "project": "HIV"
+  },
+  {
+    "id": "CHAT-005",
+    "channel": "tb-team",
+    "timestamp": "2026-10-13T11:00:00+08:00",
+    "author_id": "STF-013",
+    "author": "Yusuf Hamdani",
+    "acl_groups": ["tb_dots", "dokter", "perawat"],
+    "content": "Reminder: pasien TB dengan kode RM-2026-014 (Budi Kurniawan) sudah 2 hari tidak ambil OAT. Mohon bantu follow-up. Alamat di Kelurahan Tamalanrea. Mohon jangan share nama ke grup umum.",
+    "sensitive_fields": ["medical_record"],
+    "project": "TB"
+  },
+  {
+    "id": "CHAT-006",
+    "channel": "all-staff",
+    "timestamp": "2026-10-15T15:20:00+08:00",
+    "author_id": "STF-015",
+    "author": "Joko Susilo",
+    "acl_groups": ["all_staff"],
+    "content": "Info: mulai besok pendaftaran online via WhatsApp sudah bisa. Pasien tinggal kirim NIK dan nomor BPJS untuk daftar. Antrean lebih cepat.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-007",
+    "channel": "all-staff",
+    "timestamp": "2026-10-15T15:45:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["all_staff"],
+    "content": "Mohon maaf, saya klarifikasi: pendaftaran online via WhatsApp TIDAK boleh menerima NIK atau nomor BPJS mentah melalui chat. Gunakan form resmi SIMPUS. Data pribadi pasien tidak boleh dikirim ke chat umum. Mohon diperhatikan.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-008",
+    "channel": "kia-bidan",
+    "timestamp": "2026-10-16T10:10:00+08:00",
+    "author_id": "STF-008",
+    "author": "Bd. Siti Aisyah",
+    "acl_groups": ["bidan", "kia", "dokter"],
+    "content": "Ibu hamil dengan kode RM-2026-031 (usia kehamilan 32 minggu) datang dengan tekanan darah 150/95, ada proteinuria. Suspek preeklamsia. Rencana rujuk ke RSIA Sitti Khadijah hari ini. Mohon koordinasi dengan dr. Sari.",
+    "sensitive_fields": ["medical_record"],
+    "project": "KIA"
+  },
+  {
+    "id": "CHAT-009",
+    "channel": "kia-bidan",
+    "timestamp": "2026-10-16T10:25:00+08:00",
+    "author_id": "STF-003",
+    "author": "dr. Sari Nurhaliza",
+    "acl_groups": ["bidan", "kia", "dokter"],
+    "content": "Betul. Rujuk segera, jangan tunggu. Siapkan surat rujukan dan pastikan ambulans PSC 119. Kalau perlu saya ikut. Update kode RM saja di grup.",
+    "sensitive_fields": [],
+    "project": "KIA"
+  },
+  {
+    "id": "CHAT-010",
+    "channel": "farmasi",
+    "timestamp": "2026-10-17T08:30:00+08:00",
+    "author_id": "STF-010",
+    "author": "Apt. Hasan Basri",
+    "acl_groups": ["farmasi", "dokter"],
+    "content": "⚠️ Stok Amoksisilin 500mg di apotek puskesmas TINGGAL 40 tablet. Kebutuhan rata-rata 200 tablet/minggu. Permintaan ke Dinkes sudah diajukan, ETA 25 Oktober. Sementara alihkan ke Amoksisilin 250mg 2x dosis? Atau rujuk resep ke apotek mitra? Mohon arahan.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-011",
+    "channel": "farmasi",
+    "timestamp": "2026-10-17T09:00:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["farmasi", "dokter", "kepala"],
+    "content": "Untuk sementara alihkan ke Amoksisilin 250mg 2x dosis, TAPI hanya untuk pasien dewasa tanpa gangguan ginjal. Kalau ada pasien dengan gangguan ginjal atau anak, rujuk ke apotek mitra. Farmasi tolong catat di log.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-012",
+    "channel": "gizi-stunting",
+    "timestamp": "2026-10-18T11:00:00+08:00",
+    "author_id": "STF-012",
+    "author": "Rahma Yulianti",
+    "acl_groups": ["gizi", "stunting", "dokter", "bidan"],
+    "content": "Hasil pengukuran Posyandu Melati 3 minggu ini: 2 balita dengan status gizi buruk (kode anak: A-2026-045, A-2026-046). Sudah dirujuk ke poli gizi dan diberi PMT. Mohon pemantauan ketat 2 minggu ke depan. Detail identitas lengkap hanya di SIMPUS, di sini pakai kode.",
+    "sensitive_fields": ["medical_record"],
+    "project": "Stunting"
+  },
+  {
+    "id": "CHAT-013",
+    "channel": "all-staff",
+    "timestamp": "2026-10-18T16:00:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["all_staff"],
+    "content": "Pengingat: hari Jumat besok, poli tutup sementara pukul 11:00–13:00 WITA untuk salat Jumat. Pasien yang datang di jam itu akan dijadwalkan ulang atau diarahkan ke IGD RS terdekat. Mohon diinformasikan ke pasien.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-014",
+    "channel": "kepala-manajemen",
+    "timestamp": "2026-10-19T09:15:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["kepala", "manajemen", "bendahara"],
+    "content": "Update Proyek Bahari: tender pengadaan 2 unit USG untuk Pustu Biringkanaya dan Pustu Tamalanrea Indah. Anggaran Rp 850 juta. Vendor yang masuk shortlist: PT Medika Sejahtera, PT Alkes Nusantara, PT Sinar Diagnostik. Evaluasi teknis 25 Oktober. Jangan dibahas di luar grup manajemen.",
+    "sensitive_fields": [],
+    "project": "Bahari"
+  },
+  {
+    "id": "CHAT-015",
+    "channel": "all-staff",
+    "timestamp": "2026-10-19T13:00:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["all_staff"],
+    "content": "Pengumuman: PIN Polio putaran kedua akan dilaksanakan 12–18 November 2026. Target sasaran usia 0–59 bulan. Semua Posyandu akan buka tambahan hari Sabtu. Petugas imunisasi tolong siapkan logistik dan jadwal. Koordinasi dengan Bu Ratna.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-016",
+    "channel": "lab",
+    "timestamp": "2026-10-19T15:30:00+08:00",
+    "author_id": "STF-020",
+    "author": "Ningsih Kartika",
+    "acl_groups": ["lab", "dokter", "kepala"],
+    "content": "⚠️ Reagen untuk pemeriksaan fungsi hati (SGOT/SGPT) tinggal cukup untuk 5 hari. Sudah ajukan permintaan, tapi kalau tidak datang sebelum 24 Oktober, kita harus rujuk sampel ke lab RS Wahidin. Biaya tambahan Rp 45.000/pemeriksaan, tolong koordinasi dengan bendahara.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-017",
+    "channel": "pendaftaran",
+    "timestamp": "2026-10-20T07:45:00+08:00",
+    "author_id": "STF-015",
+    "author": "Joko Susilo",
+    "acl_groups": ["pendaftaran", "admin"],
+    "content": "Sistem SIMPUS error sejak pagi. Sudah lapor ke Dinkes IT, ETA perbaikan 2 jam. Sementara pakai form manual. Mohon jangan kirim data pasien lewat WhatsApp pribadi, tetap pakai kertas.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-018",
+    "channel": "all-staff",
+    "timestamp": "2026-10-20T09:00:00+08:00",
+    "author_id": "STF-002",
+    "author": "dr. Ahmad Fauzi",
+    "acl_groups": ["all_staff"],
+    "content": "Rekan-rekan, saya izin cuti 21–25 Oktober untuk urusan keluarga di Jakarta. Pengganti sementara poli umum: dr. Sari. Pasien TB DOTS saya serahkan ke Yusuf. Mohon maklum.",
+    "sensitive_fields": []
+  },
+  {
+    "id": "CHAT-019",
+    "channel": "jiwa",
+    "timestamp": "2026-10-20T10:30:00+08:00",
+    "author_id": "STF-003",
+    "author": "dr. Sari Nurhaliza",
+    "acl_groups": ["dokter", "jiwa"],
+    "content": "Pasien jiwa dengan kode RM-2026-038 sedang dalam fase stabil, sudah kontrol rutin. Obat risperidon stok aman. Keluarga sudah diberikan edukasi. Mohon koordinasi kalau ada perubahan.",
+    "sensitive_fields": ["medical_record"],
+    "project": "Jiwa"
+  },
+  {
+    "id": "CHAT-020",
+    "channel": "all-staff",
+    "timestamp": "2026-10-20T14:00:00+08:00",
+    "author_id": "STF-021",
+    "author": "Hasna Kamila",
+    "acl_groups": ["all_staff", "keuangan"],
+    "content": "Info penggajian: gaji bulan Oktober akan cair tanggal 25. Ada potongan BPJS Kesehatan dan Ketenagakerjaan. Slip gaji akan dikirim ke email masing-masing. Mohon jangan tanya nominal di grup.",
+    "sensitive_fields": ["salary"]
+  },
+  {
+    "id": "CHAT-021",
+    "channel": "kepala-manajemen",
+    "timestamp": "2026-10-21T08:30:00+08:00",
+    "author_id": "STF-001",
+    "author": "dr. Fatimah Rahmawati",
+    "acl_groups": ["kepala", "manajemen"],
+    "content": "⚠️ Proyek Cakalang update: hasil lab keluar lebih cepat. Konfirmasi 2 dari 3 suspek Hepatitis A positif. 1 negatif. Klaster masih di Kelurahan Biringkanaya. Kita akan laporkan ke Dinkes hari ini. Pesan ke tim: jangan diskusi di grup umum sampai Dinkes rilis resmi.",
+    "sensitive_fields": [],
+    "project": "Cakalang"
+  },
+  {
+    "id": "CHAT-022",
+    "channel": "general",
+    "timestamp": "2026-10-21T09:00:00+08:00",
+    "author_id": "STF-022",
+    "author": "Fajar Ramadhan",
+    "acl_groups": ["all_staff"],
+    "content": "Halo kak, saya Fajar, mahasiswa magang dari Unhas. Mulai hari ini magang di pendaftaran sampai Desember. Mohon bimbingannya.",
+    "sensitive_fields": []
+  }
+]

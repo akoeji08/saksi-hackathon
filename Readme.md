@@ -82,20 +82,34 @@ Detail lengkap: [`docs/architecture.md`](./docs/architecture.md)
 
 ### Prasyarat
 
-| Tool | Versi | Link |
-|:---|:---|:---|
-| Node.js | 20+ | [nodejs.org](https://nodejs.org) |
-| WorkBuddy Desktop | 5.8.4+ | [Tencent Cloud](https://cloud.tencent.com) |
-| Git | Any | [git-scm.com](https://git-scm.com) |
+| Jalur | Yang dibutuhkan |
+|:---|:---|
+| **Satu klik (Ahli)** | WorkBuddy Desktop 5.8.4+ saja |
+| Pengembang (terminal) | + Node.js 20+, Git |
 
-Verifikasi:
+Jalur satu klik tidak memerlukan Node.js, Git, atau API key: runtime Node sudah
+menyatu dengan WorkBuddy, dan engine beserta dataset ikut di dalam paket Ahli.
 
-```powershell
-node -v      # v20.x.x atau lebih
-git --version
-```
+### Instalasi — satu klik (disarankan)
 
-### Instalasi (5 menit)
+SAKSI dikemas sebagai **Ahli WorkBuddy**. Skill, dataset, dan engine ikut di dalam
+paketnya, jadi tidak ada yang perlu di-clone atau diunduh terpisah.
+
+1. Buka WorkBuddy → **Ahli** di bilah kiri.
+2. Cari **SAKSI**.
+3. Tekan **Tambahkan ke Ahli Saya**.
+4. Langsung tanya, seperti chat biasa:
+
+   ```
+   Berapa stok Amoksisilin 500mg sekarang?
+   ```
+
+Tidak perlu Node.js, Git, atau API key di sisi pengguna — runtime Node sudah
+menyatu dengan WorkBuddy.
+
+### Instalasi manual (jalur pengembang)
+
+Kalau ingin memeriksa engine sebelum memasang apa pun:
 
 ```powershell
 # 1. Clone repo
@@ -104,13 +118,21 @@ cd saksi-hackathon
 
 # 2. Uji engine standalone
 $env:BRAIN_USER = "STF-005"
-node engine/ask.mjs --query "Berapa stok Amoksisilin 500mg sekarang?"
+node engine/ask.mjs --query "Apa itu Proyek Cakalang?"   # BUKTI_BELUM_CUKUP
+$env:BRAIN_USER = "STF-001"
+node engine/ask.mjs --query "Apa itu Proyek Cakalang?"   # TERVERIFIKASI + 3 sumber
 $env:BRAIN_USER = $null
 
-# 3. Install skill ke WorkBuddy
+# 3. Pasang sebagai skill
 Copy-Item -Recurse skill "$env:USERPROFILE\.workbuddy-ai\skills\saksi"
-Copy-Item "$env:USERPROFILE\.workbuddy-ai\skills\saksi\current-user.example.json" `
-          "$env:USERPROFILE\.workbuddy-ai\skills\saksi\current-user.json"
+```
+
+Identitas saat memakai skill diatur lewat `current-user.json`, bukan variabel
+lingkungan — supaya model tidak bisa memilih identitasnya sendiri (batas B2):
+
+```powershell
+node "$env:USERPROFILE\.workbuddy-ai\skills\saksi\scripts\set-user.mjs"        # lihat daftar
+node "$env:USERPROFILE\.workbuddy-ai\skills\saksi\scripts\set-user.mjs" STF-001 # ganti identitas
 ```
 
 Buka WorkBuddy → chat baru → ketik:
