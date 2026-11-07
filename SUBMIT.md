@@ -17,12 +17,12 @@ lengkap dengan lokasi file yang perlu diunggah.
 | 4 | Chat log screenshots | ✅ Siap | 4 tangkapan asli WorkBuddy (syarat minimal 3) |
 | 5 | Conversation history | ✅ Siap | Transkrip 320 KB, 25 permintaan, 826 pemanggilan alat |
 | 6 | Project Link | ✅ Live | Sudah tayang dan terverifikasi |
-| 7 | Demo video | ⚠️ **Perlu unggah ulang** | File 5:16 sudah jadi; link YouTube masih versi lama |
+| 7 | Demo video | ✅ **Tayang** | 5:16, sudah diunggah ke YouTube (Unlisted) |
 | 8 | Expert launcher link | ✅ **Terbit** | `sharecode=N2ftbGk0…`, terpasang di tombol situs |
 
-**Satu hal yang tersisa:**
+**Status: tidak ada lagi yang tertahan.** Semua komponen siap diunggah.
 
-1. **Unggah video baru ke YouTube** (§7) — link lama menunjuk ke video versi lama.
+Link video demo: `https://youtu.be/hDWy8_bPozI`
 
 ---
 
@@ -259,38 +259,43 @@ hanya perlu dipakai kalau form menyediakan field terpisah.
 
 ---
 
-## 7. Demo video — ⚠️ perlu unggah ulang
+## 7. Demo video — ✅ sudah tayang
 
-Video sudah dibangun ulang dan **berbeda** dari yang ada di YouTube sekarang. Yang lama
-tidak punya adegan gerbang izin dan tidak punya adegan pemasangan satu klik.
+| Field | Nilai |
+|:---|:---|
+| URL | `https://youtu.be/hDWy8_bPozI` |
+| Judul | SAKSI — Evidence-to-Decision Engine untuk Puskesmas \| WorkBuddy |
+| Durasi | 5:16 |
+| Visibilitas | Unlisted (bisa dibuka siapa pun yang punya link) |
+| File sumber | `C:\saksi-hackathon\submission-assets\SAKSI-demo-video-final.mp4` |
 
-**Langkah:**
+Video ini **sudah versi final** — memuat adegan gerbang izin (21/42/0 vs 1/42/5) dan
+adegan pemasangan satu klik lewat Expert launcher, yang tidak ada di potongan lama.
 
-1. Buka https://youtube.com/upload
-2. Unggah `C:\saksi-hackathon\submission-assets\SAKSI-demo-video-final.mp4`
-3. Isi judul:
+Kalau perlu unggah ulang di kemudian hari, pakai judul dan deskripsi berikut:
 
-   ```
-   SAKSI — Evidence-to-Decision Engine untuk Puskesmas | WorkBuddy
-   ```
+**Judul**
 
-4. Isi deskripsi:
+```
+SAKSI — Evidence-to-Decision Engine untuk Puskesmas | WorkBuddy
+```
 
-   ```
-   SAKSI adalah workplace brain untuk Puskesmas Tamalanrea Jaya yang memeriksa izin
-   sebelum menjawab, menempelkan sumber pada setiap klaim, menolak tanpa membocorkan
-   keberadaan data, dan mencatat audit tanpa menyimpan isi.
+**Deskripsi**
 
-   Demo langsung: https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO
-   Kode sumber: https://github.com/akoeji08/saksi-hackathon
+```
+SAKSI adalah workplace brain untuk Puskesmas Tamalanrea Jaya yang memeriksa izin
+sebelum menjawab, menempelkan sumber pada setiap klaim, menolak tanpa membocorkan
+keberadaan data, dan mencatat audit tanpa menyimpan isi.
 
-   Dibuat untuk Tencent Cloud AI CAN DO IT Hackathon Indonesia 2026.
-   ```
+Demo langsung: https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO
+Kode sumber: https://github.com/akoeji08/saksi-hackathon
 
-5. **Visibility: Unlisted** — bukan Private. Juri tidak bisa membuka video Private.
-6. Setelah selesai, salin link baru dan perbarui di form + `README.md`.
+Dibuat untuk Tencent Cloud AI CAN DO IT Hackathon Indonesia 2026.
+```
 
-Link lama (untuk referensi): `https://youtu.be/AMkMF_ZJjUo`
+**Visibilitas: Unlisted** — jangan Private. Juri tidak bisa membuka video Private.
+
+Video lama (sudah tidak dipakai): `https://youtu.be/AMkMF_ZJjUo`
 
 ---
 

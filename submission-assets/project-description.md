@@ -118,7 +118,7 @@ berwenang, nol klaim terlarang** — memenuhi Critical Failure Check.
 ### Tautan
 
 - **Demo langsung:** https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO
-- **Video:** https://youtu.be/AMkMF_ZJjUo
+- **Video:** https://youtu.be/hDWy8_bPozI
 - **Kode sumber:** https://github.com/akoeji08/saksi-hackathon
 
 ### Dibuat oleh
@@ -193,7 +193,7 @@ berisi 22 staf, 5 tingkat clearance, 20 dokumen, 22 chat, dan 15 obat, semuanya 
 Remotion (React + TypeScript) untuk video demo. edge-tts untuk narasi bahasa Indonesia.
 
 TAUTAN. Demo langsung: https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO .
-Video: https://youtu.be/AMkMF_ZJjUo . Kode sumber:
+Video: https://youtu.be/hDWy8_bPozI . Kode sumber:
 https://github.com/akoeji08/saksi-hackathon .
 
 DIBUAT OLEH. Anshar Priwarsani, AI Engineer, AkoejiDev.

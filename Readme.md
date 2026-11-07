@@ -366,7 +366,7 @@ saksi-hackathon/
 
 ## 🎬 Demo Video
 
-**Tonton demo video:** https://youtu.be/AMkMF_ZJjUo
+**Tonton demo video:** https://youtu.be/hDWy8_bPozI
 
 Durasi **5:15.9** (315.9 detik, 9.477 frame) dengan narasi Bahasa Indonesia:
 

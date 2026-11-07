@@ -10,10 +10,10 @@ Semua waktu di bawah diambil dari hasil render, bukan perkiraan.
 | Resolusi | 1920 × 1080 |
 | Ukuran | 17.9 MB |
 | Narasi | Bahasa Indonesia, `id-ID-ArdiNeural`, tempo natural |
-| YouTube | https://youtu.be/AMkMF_ZJjUo |
+| YouTube | https://youtu.be/hDWy8_bPozI |
 
-> Video lama (sebelum pembaruan) sudah digantikan. Kalau link YouTube masih menunjuk
-> ke versi lama, unggah ulang file di atas dan perbarui link di form submission.
+> Video lama (sebelum pembaruan) sudah digantikan. Link YouTube di atas menunjuk ke
+> versi final yang sudah tayang (Unlisted).
 
 ---
 
