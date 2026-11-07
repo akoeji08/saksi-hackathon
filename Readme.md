@@ -95,6 +95,14 @@ menyatu dengan WorkBuddy, dan engine beserta dataset ikut di dalam paket Ahli.
 SAKSI dikemas sebagai **Ahli WorkBuddy**. Skill, dataset, dan engine ikut di dalam
 paketnya, jadi tidak ada yang perlu di-clone atau diunduh terpisah.
 
+**Tautan launcher:**
+
+```
+https://www.workbuddy.ai/work/launch/?sharecode=N2ftbGk0dkOFTitJVq1lq1_X0bxlnYXgLjmUELdKW81ZanPQwohx_YIvMlUGdBuD&expertname=Evidence-to-Decision+Engine&buddy_type=workbuddy-ai
+```
+
+Buka tautan itu, kartu ahli SAKSI langsung muncul. Atau lewat aplikasi:
+
 1. Buka WorkBuddy → **Ahli** di bilah kiri.
 2. Cari **SAKSI**.
 3. Tekan **Tambahkan ke Ahli Saya**.
@@ -388,6 +396,7 @@ Panduan lengkap mengisi form submission (teks siap copy + lokasi file):
 | Project title | SAKSI — Evidence-to-Decision Engine | ✅ |
 | Short blurb | "Workplace brain yang membuktikan jawabannya — dan berani menolak." | ✅ |
 | Live demo | https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO | ✅ |
+| Expert launcher | https://www.workbuddy.ai/work/launch/?sharecode=N2ftbGk0dkOFTitJVq1lq1_X0bxlnYXgLjmUELdKW81ZanPQwohx_YIvMlUGdBuD&expertname=Evidence-to-Decision+Engine&buddy_type=workbuddy-ai | ✅ |
 | Project description | [`submission-assets/project-description.md`](./submission-assets/project-description.md) | ✅ |
 | Accountability sheet | [`docs/accountability.md`](./docs/accountability.md) | ✅ |
 | Test results | [`docs/test-results.md`](./docs/test-results.md) | ✅ |

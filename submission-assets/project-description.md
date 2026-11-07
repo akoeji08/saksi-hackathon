@@ -15,6 +15,9 @@ SAKSI dikemas sebagai **Ahli (Expert) WorkBuddy**: dipasang dengan satu klik dar
 Center, tanpa terminal, tanpa clone, tanpa API key. Skill, dataset, dan engine ikut di dalam
 paketnya.
 
+Tautan launcher (klik → kartu ahli terbuka → "Tambahkan ke Ahli Saya"):
+`https://www.workbuddy.ai/work/launch/?sharecode=N2ftbGk0dkOFTitJVq1lq1_X0bxlnYXgLjmUELdKW81ZanPQwohx_YIvMlUGdBuD&expertname=Evidence-to-Decision+Engine&buddy_type=workbuddy-ai`
+
 ### Masalah
 
 Di puskesmas Indonesia, informasi operasional tersebar di grup WhatsApp, Drive, task board
@@ -131,6 +134,7 @@ Evidence-to-Decision Engine untuk Puskesmas Tamalanrea Jaya, puskesmas di Makass
 melayani ~120 pasien per hari dengan 22 pegawai, 2 Pustu, dan 8 Posyandu. SAKSI dikemas
 sebagai Ahli (Expert) WorkBuddy: dipasang dengan satu klik dari Expert Center, tanpa
 terminal, tanpa clone, tanpa API key. Skill, dataset, dan engine ikut di dalam paketnya.
+Tautan launcher: https://www.workbuddy.ai/work/launch/?sharecode=N2ftbGk0dkOFTitJVq1lq1_X0bxlnYXgLjmUELdKW81ZanPQwohx_YIvMlUGdBuD&expertname=Evidence-to-Decision+Engine&buddy_type=workbuddy-ai
 
 MASALAH. Di puskesmas Indonesia, informasi operasional tersebar di grup WhatsApp, Drive,
 task board (SIKA), rekam medis elektronik (SIMPUS), dan laporan bulanan. Ketika staf

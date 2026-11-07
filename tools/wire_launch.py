@@ -22,6 +22,15 @@ GMEM_MOVEABLE = 0x0002
 user32 = ctypes.windll.user32
 kernel32 = ctypes.windll.kernel32
 
+# 64-bit safe signatures: a handle truncated to c_int reads garbage.
+user32.OpenClipboard.argtypes = [ctypes.c_void_p]
+user32.OpenClipboard.restype = ctypes.c_bool
+user32.GetClipboardData.argtypes = [ctypes.c_uint]
+user32.GetClipboardData.restype = ctypes.c_void_p
+kernel32.GlobalLock.argtypes = [ctypes.c_void_p]
+kernel32.GlobalLock.restype = ctypes.c_void_p
+kernel32.GlobalUnlock.argtypes = [ctypes.c_void_p]
+
 
 def clipboard_text() -> str:
     if not user32.OpenClipboard(None):

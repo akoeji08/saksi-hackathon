@@ -18,13 +18,11 @@ lengkap dengan lokasi file yang perlu diunggah.
 | 5 | Conversation history | ✅ Siap | Transkrip 320 KB, 25 permintaan, 826 pemanggilan alat |
 | 6 | Project Link | ✅ Live | Sudah tayang dan terverifikasi |
 | 7 | Demo video | ⚠️ **Perlu unggah ulang** | File 5:16 sudah jadi; link YouTube masih versi lama |
-| 8 | Expert package (opsional) | ✅ Siap | Untuk dipasang juri lewat Expert Center |
+| 8 | Expert launcher link | ✅ **Terbit** | `sharecode=N2ftbGk0…`, terpasang di tombol situs |
 
-**Dua hal yang hanya bisa Anda lakukan:**
+**Satu hal yang tersisa:**
 
 1. **Unggah video baru ke YouTube** (§7) — link lama menunjuk ke video versi lama.
-2. **Klik "Bagikan" pada kartu SAKSI** (§8) — menghasilkan tautan launcher seperti
-   punya Skala. Setelah tersalin, satu perintah menempelkannya ke situs.
 
 ---
 
@@ -249,6 +247,16 @@ bagian itu halaman mengembalikan 403.
 https://github.com/akoeji08/saksi-hackathon
 ```
 
+**Tautan launcher Expert (opsional, untuk juri yang ingin mencoba di WorkBuddy):**
+
+```
+https://www.workbuddy.ai/work/launch/?sharecode=N2ftbGk0dkOFTitJVq1lq1_X0bxlnYXgLjmUELdKW81ZanPQwohx_YIvMlUGdBuD&expertname=Evidence-to-Decision+Engine&buddy_type=workbuddy-ai
+```
+
+Klik → kartu ahli SAKSI terbuka di WorkBuddy → "Tambahkan ke Ahli Saya". Tanpa clone,
+tanpa terminal. Sudah terpasang juga sebagai tombol di situs demo (§5), jadi tautan ini
+hanya perlu dipakai kalau form menyediakan field terpisah.
+
 ---
 
 ## 7. Demo video — ⚠️ perlu unggah ulang
@@ -297,51 +305,49 @@ C:\saksi-hackathon\submission-assets\expert\saksi.zip
 84 KB, 16 file. Isi: engine, dataset, skrip, dan avatar. Sudah diuji dengan cara
 diekstrak ke direktori kosong tanpa repo — berjalan benar.
 
-Tapi ada dua hal berbeda yang orang sering tertukar, dan keduanya ada di menu
-yang sama. Pilih sesuai tujuan:
+**Status: sudah diterbitkan.** Tautan launcher ada di §6 dan sudah terpasang sebagai
+tombol di situs demo. Bagian ini mencatat caranya, kalau perlu diulang saat ada versi baru.
 
-| Aksi di menu | Yang terjadi | Untuk apa |
-|:---|:---|:---|
-| **Bagikan** (Share) | Paket diunggah, Anda dapat `sharecode`, tautan tersalin ke clipboard: `workbuddy.ai/work/launch/?sharecode=…` | **Ini yang Anda butuhkan.** Satu tautan, juri klik, kartu ahli terbuka, "Tambahkan ke Ahli Saya" |
-| **Publikasikan ke Perpustakaan** (Publish to Library) | Dikirim ke pustaka publik Expert Center, status jadi *Under Review* lalu *Published* | Biar muncul di daftar publik. Perlu peninjauan, tidak instan |
+### Menu yang sebenarnya ada
 
-Tautan yang dipakai Skala (`workbuddy.ai/work/launch/?sharecode=…`) adalah hasil
-**Bagikan**, bukan Publikasikan. Jadi dahulukan Bagikan.
+Saat kursor diarahkan ke kartu, muncul `···` dan `Summon`. Isi menu `···`:
 
-### Langkah persisnya
+```
+View Expert · Edit Expert · Share · Open Folder · Delete
+```
 
-1. Buka WorkBuddy → sidebar kiri → **Ahli · Keterampilan · Penghubung**
-2. Klik **My Experts** (kanan atas)
-3. Arahkan kursor ke kartu **Evidence-to-Decision Engine | SAKSI** — muncul tombol
-   `···` dan `Summon`
-4. Klik `···` → menu berisi: **Lihat · Sunting · Bagikan · Publikasikan ke
-   Perpustakaan · Hapus**
-5. Klik **Bagikan**. Tautan otomatis tersalin.
+Tidak ada item "Publish to Library" di build ini. Kunci terjemahannya
+(`expertCenter.myExperts.created.ctxPublish`) masih ada di dalam aplikasi, tetapi
+tidak dipakai oleh komponen kartunya — jadi opsi itu memang tidak tersedia, bukan
+salah cari. Yang menghasilkan tautan ala Skala adalah **Share**.
 
-> Menu ini berbahasa Inggris untuk sebagian label (`Share`, `Publish to Library`)
-> karena terjemahan Indonesianya belum lengkap. Isinya sama.
+> Labelnya berbahasa Inggris (`Share`, `Open Folder`) karena terjemahan
+> Indonesianya belum lengkap di upstream.
 
-### Setelah tautan tersalin
+### Yang terjadi saat Share ditekan
 
-Jalankan satu perintah — skrip membaca clipboard, memvalidasi bahwa itu benar
-tautan peluncuran, lalu menempelkannya ke tombol di situs:
+1. Muncul **"Running security check"** — paket diperiksa, termasuk prompt dan skill.
+   Prosesnya puluhan detik, ada penghitung waktu.
+2. Hasil pada paket ini: **"Low or medium risk detected"** dengan rincian bahwa
+   skill membaca file, menulis file, membuat proses, dan memakai file sementara.
+   Itu wajar — engine-nya memang menjalankan Node. Pilih **Continue Sharing**.
+3. Muncul kartu konfirmasi berisi ringkasan ahli dan tombol **Copy Link**.
+   Tautan tersalin ke clipboard.
+
+### Memasang tautan ke situs
 
 ```powershell
 cd C:\saksi-hackathon
-python tools\wire_launch.py
+python tools\wire_launch.py          # baca clipboard, validasi, tulis ke tombol
+python tools\wire_launch.py --check  # lihat hasil tanpa mengubah
 ```
 
-Cek hasilnya tanpa mengubah apa pun:
+Skrip menolak URL yang bukan `/work/launch`. Setelah itu deploy ulang situsnya, lalu
+verifikasi dengan `node tools\check_launch.mjs` (butuh salinan di folder yang punya
+`node_modules` puppeteer-core).
 
-```powershell
-python tools\wire_launch.py --check
-```
-
-Setelah itu tombol **Tambahkan ke Ahli Saya** di situs langsung membuka kartu ahli
-di WorkBuddy, bukan lagi menampilkan teks cadangan. Terakhir, deploy ulang situsnya.
-
-Kalau form tidak menyediakan tempat untuk file tambahan, lampirkan tautan
-peluncuran itu di deskripsi sebagai pengganti lampiran zip.
+Kalau form tidak menyediakan tempat untuk file tambahan, lampirkan tautan peluncuran
+itu di deskripsi sebagai pengganti lampiran zip.
 
 ---
 
