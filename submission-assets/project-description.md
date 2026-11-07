@@ -1,63 +1,195 @@
-# SAKSI — Project Description (for Submission Form)
+# SAKSI — Project Description (Submission Form)
 
-Copy the text below into the "Project Description" field of the hackathon submission form.
+**Cara pakai:** copy blok di bawah ke field "Project Description" pada form.
+Versi markdown ada di §1, versi teks-polos (kalau field menolak markdown) di §2.
 
 ---
 
-## Project Description
+## 1. Versi markdown — copy dari sini
 
-**SAKSI** (Sumber, Akses, Konfirmasi, Kesadaran batas, Saksi Integritas jejak) is an Evidence-to-Decision Engine built as a WorkBuddy Desktop skill for **Puskesmas Tamalanrea Jaya**, a primary healthcare center in Makassar, Indonesia, serving ~120 patients daily with 22 staff across 2 sub-clinics and 8 Posyandu posts.
+**SAKSI** — *Sumber, Akses, Konfirmasi, Kesadaran batas, Saksi Integritas jejak* — adalah
+**Evidence-to-Decision Engine** untuk **Puskesmas Tamalanrea Jaya**, puskesmas di Makassar
+yang melayani ~120 pasien/hari dengan 22 pegawai, 2 Pustu, dan 8 Posyandu.
 
-### The Problem
+SAKSI dikemas sebagai **Ahli (Expert) WorkBuddy**: dipasang dengan satu klik dari Expert
+Center, tanpa terminal, tanpa clone, tanpa API key. Skill, dataset, dan engine ikut di dalam
+paketnya.
 
-In Indonesian puskesmas, operational information is scattered across WhatsApp groups, shared drives, task boards (SIKA), electronic medical records (SIMPUS), and monthly reports. When staff ask an AI assistant for help, a generic LLM that reads everything **can leak everything** — patient diagnoses (HIV, TB, mental health), internal projects, procurement budgets, and outbreak data.
+### Masalah
 
-### The Solution
+Di puskesmas Indonesia, informasi operasional tersebar di grup WhatsApp, Drive, task board
+(SIKA), rekam medis elektronik (SIMPUS), dan laporan bulanan. Ketika staf bertanya ke asisten
+AI, LLM generik yang bisa membaca semuanya **bisa membocorkan semuanya** — diagnosis pasien
+(HIV, TB, kesehatan jiwa), proyek internal, anggaran pengadaan, dan data KLB.
 
-SAKSI transforms this with three core guarantees:
+Masalahnya bukan sekadar "AI-nya kurang pintar". Masalahnya: **tidak ada bukti** bahwa AI itu
+membaca yang boleh dibaca, dan **tidak ada bukti** bahwa ia menolak yang tidak boleh.
 
-1. **Permission-first access control** — User identity is resolved from a local file (`current-user.json`), never from the chat prompt. A deny-by-default ACL check runs *before* retrieval, ensuring unauthorized documents never enter the LLM context window.
+### Solusi
 
-2. **Evidence-mandatory answers** — Every answer includes evidence cards showing source ID, timestamp, relevance reason, and content snippet. Users can trace any claim back to its origin document.
+Tiga jaminan inti:
 
-3. **Audit-trail with PII masking** — Every query is logged in `audit.jsonl` with metadata only (query text masked, source IDs, decision, timestamp). Compliant with Indonesia's UU PDP (Personal Data Protection Law).
+1. **Izin diperiksa sebelum retrieval.** Identitas pengguna dibaca dari berkas lokal
+   (`current-user.json`), **bukan** dari prompt. ACL *deny-by-default* dijalankan **sebelum**
+   satu dokumen pun masuk ke konteks LLM. Dokumen yang tidak berhak tidak pernah sampai ke
+   model — bukan "diminta untuk diabaikan", tapi tidak pernah dikirim.
 
-### Architecture (3 Layers, 4 Trust Boundaries)
+2. **Jawaban wajib berbukti.** Setiap jawaban membawa kartu bukti: ID sumber, tipe, judul,
+   tanggal, dan kutipan relevan. Pengguna bisa melacak setiap klaim ke dokumen asalnya.
 
-**Layer 1 — UI:** WorkBuddy Desktop chat interface. Users invoke SAKSI with `/saksi <query>`.
+3. **Jejak audit tanpa isi.** Setiap kueri dicatat di `audit.jsonl` sebagai metadata saja
+   (kueri ter-mask, ID sumber, keputusan, waktu). Isi jawaban tidak pernah disimpan. Selaras
+   dengan UU PDP.
 
-**Layer 2 — Skill:** SKILL.md instructions + JavaScript wrapper that sets the `BRAIN_USER` environment variable from `current-user.json` and calls the engine.
+### Yang membedakan: gerbang izin bisa diperiksa
 
-**Layer 3 — Engine:** Node.js pipeline with 10 deterministic stages:
-User Resolver → Permission Gate (deny-by-default) → Retrieval (ACL-filtered) → Scoring v2 (critical + prefix match) → Quality Gate → Conflict Detector → Injection Sanitizer (10 regex patterns) → PII Masking → Answer Composer → Audit Ledger.
+Setiap keluaran engine menyertakan penghitung gerbang `_meta.gate`:
 
-**Four Trust Boundaries:**
-- **B1 (LLM → Skill):** SAKSI is invoked by name (`/saksi`), preventing the LLM from "answering on its own" outside the engine.
-- **B2 (Identity → Engine):** User identity comes from `current-user.json` file, not from the prompt — preventing privilege escalation via prompt manipulation.
-- **B3 (Data → LLM Context):** `canAccess()` is called *before* retrieval. Unauthorized documents never enter the LLM context.
-- **B4 (Engine → Audit):** Audit logs record `query_masked` and `sources_ids` only. Sensitive content is never persisted in logs.
+```
+STF-005 (perawat, clearance: internal)
+  kueri  : "Apa itu Proyek Cakalang?"
+  gate   : 21 diblokir / 42 dipindai / 0 lolos
+  status : BUKTI_BELUM_CUKUP
 
-### Key Features
+STF-001 (kepala puskesmas, clearance: top_secret_medical)
+  kueri  : "Apa itu Proyek Cakalang?"
+  gate   : 1 diblokir / 42 dipindai / 5 lolos
+  status : TERVERIFIKASI  (sumber: DOC-010, CHAT-003, CHAT-021)
+```
 
-- **Refusal Equivalence:** When a user lacks access, SAKSI responds identically whether the data exists or not — "I couldn't find accessible information for that question." No metadata leakage about restricted topics.
-- **Conflict Resolution:** When sources disagree (e.g., outdated document vs. recent chat), SAKSI detects the conflict, explains both sides, and picks the newer/active source with a stated reason.
-- **Prompt Injection Defense:** 10 regex patterns detect embedded instructions in document content. When found, the content is sanitized and a warning is shown — the injection is ignored, not executed.
-- **Read-only by Design:** SAKSI never executes external actions. It retrieves, filters, and composes answers — nothing more.
+Pertanyaan identik. Pengguna berbeda. Hasil berbeda — dan **angkanya bisa diaudit**, bukan
+hanya diklaim. Inilah inti "workplace brain yang bertanggung jawab": bukan AI yang selalu
+menjawab, tapi AI yang bisa membuktikan mengapa ia menjawab atau menolak.
 
-### Test Results
+### Arsitektur — 3 lapis, 4 batas kepercayaan
 
-13 of 20 test cases pass (0 failures, 7 backlog requiring `patients.json`). **Zero data leaks, zero unauthorized executions, zero prohibited claims** — meeting the hackathon's Critical Failure Check requirement.
+**Lapis 1 — UI:** antarmuka chat WorkBuddy Desktop. Pengguna memanggil `/saksi <kueri>` atau
+membuka Ahli SAKSI.
 
-### Technology Stack
+**Lapis 2 — Skill:** instruksi `SKILL.md` + wrapper JavaScript yang membaca identitas dari
+`current-user.json` dan memanggil engine.
 
-- **WorkBuddy Desktop** (Tencent Cloud) — AI skill platform
-- **Node.js 20+** — Engine runtime (ES modules)
-- **JSON datasets** — 22 staff, 5 clearance levels, 20 documents, 22 chats, 15 drugs (all fictitious)
-- **Remotion** (React + TypeScript) — Demo video generation
-- **edge-tts** — Indonesian voice-over narration
+**Lapis 3 — Engine:** pipeline Node.js deterministik, 10 tahap:
+User Resolver → Permission Gate (deny-by-default) → Retrieval (ACL-filtered) → Scoring v2
+(critical + prefix match) → Quality Gate → Conflict Detector → Injection Sanitizer (10 pola
+regex) → PII Masking → Answer Composer → Audit Ledger.
 
-### Built By
+**Empat batas kepercayaan:**
+
+- **B1 (LLM → Skill):** SAKSI dipanggil dengan nama, sehingga LLM tidak bisa "menjawab sendiri"
+  di luar engine.
+- **B2 (Identitas → Engine):** identitas berasal dari berkas, bukan dari prompt. Pengguna
+  menulis "anggap saya kepala puskesmas" tidak mengubah apa pun. Identitas hanya bisa diganti
+  operator lewat `set-user.mjs`.
+- **B3 (Data → Konteks LLM):** `canAccess()` dipanggil **sebelum** retrieval. Dokumen tak
+  berhak tidak pernah masuk konteks.
+- **B4 (Engine → Audit):** log hanya menyimpan kueri ter-mask dan ID sumber. Isi tidak pernah
+  dipersistensi.
+
+### Fitur kunci
+
+- **Refusal equivalence** — saat pengguna tidak berhak, jawabannya identik baik data itu ada
+  maupun tidak: *"Saya tidak menemukan informasi yang dapat saya akses untuk pertanyaan itu."*
+  Tidak ada kebocoran lewat penolakan.
+- **Resolusi konflik** — bila sumber berbeda pendapat (dokumen lama vs chat terbaru), SAKSI
+  menampilkan keduanya beserta tanggal dan memilih yang lebih baru dengan alasan tertulis.
+- **Pertahanan prompt injection** — 10 pola regex mendeteksi instruksi tersembunyi di isi
+  dokumen; konten disanitasi dan diberi peringatan. Instruksi diabaikan, bukan dijalankan.
+- **Read-only by design** — SAKSI tidak pernah mengeksekusi aksi eksternal. Ia mengambil,
+  menyaring, dan menyusun jawaban. Tidak lebih.
+
+### Hasil pengujian
+
+**13 dari 20 kasus uji lulus, 0 gagal**, 7 backlog (butuh `patients.json` yang tidak boleh
+disintesis karena menyangkut data pasien nyata). **Nol kebocoran data, nol eksekusi tak
+berwenang, nol klaim terlarang** — memenuhi Critical Failure Check.
+
+### Tumpukan teknologi
+
+- **WorkBuddy Desktop** (Tencent Cloud) — platform Ahli/skill
+- **Node.js 20+** — runtime engine (ES modules), portabel lintas direktori
+- **Dataset JSON** — 22 staf, 5 tingkat clearance, 20 dokumen, 22 chat, 15 obat (semuanya fiktif)
+- **Remotion** (React + TypeScript) — video demo
+- **edge-tts** — narasi bahasa Indonesia
+
+### Tautan
+
+- **Demo langsung:** https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO
+- **Video:** https://youtu.be/AMkMF_ZJjUo
+- **Kode sumber:** https://github.com/akoeji08/saksi-hackathon
+
+### Dibuat oleh
 
 **Anshar Priwarsani** — AI Engineer, AkoejiDev
-GitHub: https://github.com/akoeji08/saksi-hackathon
-Demo Video: https://youtu.be/AMkMF_ZJjUo
+
+---
+
+## 2. Versi teks-polos — kalau field menolak markdown
+
+SAKSI (Sumber, Akses, Konfirmasi, Kesadaran batas, Saksi Integritas jejak) adalah
+Evidence-to-Decision Engine untuk Puskesmas Tamalanrea Jaya, puskesmas di Makassar yang
+melayani ~120 pasien per hari dengan 22 pegawai, 2 Pustu, dan 8 Posyandu. SAKSI dikemas
+sebagai Ahli (Expert) WorkBuddy: dipasang dengan satu klik dari Expert Center, tanpa
+terminal, tanpa clone, tanpa API key. Skill, dataset, dan engine ikut di dalam paketnya.
+
+MASALAH. Di puskesmas Indonesia, informasi operasional tersebar di grup WhatsApp, Drive,
+task board (SIKA), rekam medis elektronik (SIMPUS), dan laporan bulanan. Ketika staf
+bertanya ke asisten AI, LLM generik yang bisa membaca semuanya bisa membocorkan semuanya:
+diagnosis pasien (HIV, TB, kesehatan jiwa), proyek internal, anggaran pengadaan, dan data
+KLB. Masalahnya bukan sekadar AI yang kurang pintar, melainkan tidak ada bukti bahwa AI itu
+membaca yang boleh dibaca, dan tidak ada bukti bahwa ia menolak yang tidak boleh.
+
+SOLUSI. Tiga jaminan inti. Pertama, izin diperiksa sebelum retrieval: identitas pengguna
+dibaca dari berkas lokal (current-user.json), bukan dari prompt, dan ACL deny-by-default
+dijalankan sebelum satu dokumen pun masuk ke konteks LLM. Dokumen yang tidak berhak tidak
+pernah sampai ke model. Kedua, jawaban wajib berbukti: setiap jawaban membawa kartu bukti
+berisi ID sumber, tipe, judul, tanggal, dan kutipan relevan, sehingga setiap klaim bisa
+dilacak ke dokumen asalnya. Ketiga, jejak audit tanpa isi: setiap kueri dicatat di
+audit.jsonl sebagai metadata saja (kueri ter-mask, ID sumber, keputusan, waktu), isi jawaban
+tidak pernah disimpan, selaras dengan UU PDP.
+
+YANG MEMBEDAKAN. Setiap keluaran engine menyertakan penghitung gerbang _meta.gate. Untuk
+kueri "Apa itu Proyek Cakalang?" sebagai STF-005 (perawat, clearance internal), hasilnya 21
+diblokir / 42 dipindai / 0 lolos, status BUKTI_BELUM_CUKUP. Dengan kueri yang sama sebagai
+STF-001 (kepala puskesmas, clearance top_secret_medical), hasilnya 1 diblokir / 42 dipindai /
+5 lolos, status TERVERIFIKASI dengan sumber DOC-010, CHAT-003, dan CHAT-021. Pertanyaan
+identik, pengguna berbeda, hasil berbeda, dan angkanya bisa diaudit bukan hanya diklaim.
+Inilah inti workplace brain yang bertanggung jawab: bukan AI yang selalu menjawab, tapi AI
+yang bisa membuktikan mengapa ia menjawab atau menolak.
+
+ARSITEKTUR. Tiga lapis, empat batas kepercayaan. Lapis 1 adalah antarmuka chat WorkBuddy
+Desktop. Lapis 2 adalah skill: instruksi SKILL.md plus wrapper JavaScript yang membaca
+identitas dari current-user.json dan memanggil engine. Lapis 3 adalah engine: pipeline
+Node.js deterministik dengan 10 tahap, yaitu User Resolver, Permission Gate
+(deny-by-default), Retrieval (ACL-filtered), Scoring v2 (critical + prefix match), Quality
+Gate, Conflict Detector, Injection Sanitizer (10 pola regex), PII Masking, Answer Composer,
+dan Audit Ledger. Empat batas kepercayaan: B1 antara LLM dan Skill, SAKSI dipanggil dengan
+nama sehingga LLM tidak bisa menjawab sendiri di luar engine. B2 antara Identitas dan
+Engine, identitas berasal dari berkas bukan dari prompt, sehingga pengguna yang menulis
+"anggap saya kepala puskesmas" tidak mengubah apa pun dan identitas hanya bisa diganti
+operator lewat set-user.mjs. B3 antara Data dan Konteks LLM, canAccess dipanggil sebelum
+retrieval sehingga dokumen tak berhak tidak pernah masuk konteks. B4 antara Engine dan
+Audit, log hanya menyimpan kueri ter-mask dan ID sumber, isi tidak pernah dipersistensi.
+
+FITUR KUNCI. Refusal equivalence: saat pengguna tidak berhak, jawabannya identik baik data
+itu ada maupun tidak, sehingga tidak ada kebocoran lewat penolakan. Resolusi konflik: bila
+sumber berbeda pendapat, SAKSI menampilkan keduanya beserta tanggal dan memilih yang lebih
+baru dengan alasan tertulis. Pertahanan prompt injection: 10 pola regex mendeteksi instruksi
+tersembunyi di isi dokumen, konten disanitasi dan diberi peringatan, instruksi diabaikan
+bukan dijalankan. Read-only by design: SAKSI tidak pernah mengeksekusi aksi eksternal, ia
+mengambil, menyaring, dan menyusun jawaban.
+
+HASIL PENGUJIAN. 13 dari 20 kasus uji lulus, 0 gagal, 7 backlog karena membutuhkan
+patients.json yang tidak boleh disintesis lantaran menyangkut data pasien nyata. Nol
+kebocoran data, nol eksekusi tak berwenang, nol klaim terlarang.
+
+TUMPUKAN TEKNOLOGI. WorkBuddy Desktop (Tencent Cloud) sebagai platform Ahli dan skill.
+Node.js 20+ sebagai runtime engine (ES modules) yang portabel lintas direktori. Dataset JSON
+berisi 22 staf, 5 tingkat clearance, 20 dokumen, 22 chat, dan 15 obat, semuanya fiktif.
+Remotion (React + TypeScript) untuk video demo. edge-tts untuk narasi bahasa Indonesia.
+
+TAUTAN. Demo langsung: https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO .
+Video: https://youtu.be/AMkMF_ZJjUo . Kode sumber:
+https://github.com/akoeji08/saksi-hackathon .
+
+DIBUAT OLEH. Anshar Priwarsani, AI Engineer, AkoejiDev.

@@ -276,17 +276,19 @@ $ node engine/show-audit.mjs --user STF-005
 ```
 saksi-hackathon/
 ├── README.md                       ← file ini
+├── SUBMIT.md                       ← panduan isi form submission
+├── SETUP-JURI.md                   ← panduan cepat untuk juri
 ├── LICENSE                         ← MIT
 ├── .gitignore
 │
 ├── docs/
-│   ├── architecture.md             ← diagram + trust boundaries
+│   ├── architecture.md             ← diagram, trust boundaries, _meta.gate
 │   ├── accountability.md           ← 5 aturan accountable AI
 │   ├── test-results.md             ← 20 test case matrix
-│   ├── demo-script.md              ← script 7 menit + 90 detik
+│   ├── demo-script.md              ← peta adegan video + narasi
 │   └── product-sharing.md          ← WorkBuddy insights
 │
-├── data/
+├── data/                           ← sumber kebenaran dataset
 │   ├── staff.json                  ← 22 pegawai
 │   ├── permissions.json            ← 5 clearance levels
 │   ├── documents.json              ← 20 dokumen
@@ -296,20 +298,56 @@ saksi-hackathon/
 ├── engine/
 │   ├── ask.mjs                     ← engine utama (v5)
 │   ├── show-audit.mjs              ← viewer audit log
+│   ├── setup.ps1                   ← setup Windows
 │   └── README.md
 │
-├── skill/
+├── skill/                          ← paket distribusi (mandiri)
 │   ├── SKILL.md                    ← instruksi WorkBuddy
+│   ├── current-user.json           ← identitas aktif (default STF-005)
 │   ├── current-user.example.json   ← template
-│   ├── README.md
-│   └── scripts/
-│       └── ask.mjs                 ← wrapper engine
+│   ├── engine/ask.mjs              ← salinan engine (dibuat build_skill.py)
+│   ├── data/                       ← salinan dataset
+│   ├── scripts/
+│   │   ├── ask.mjs                 ← wrapper: baca identitas, panggil engine
+│   │   └── set-user.mjs            ← operator: ganti identitas
+│   └── README.md
+│
+├── live-demo/                      ← situs publik (yang di-deploy)
+│   ├── index.html                  ← 12 bagian
+│   ├── styles.css
+│   ├── site.js                     ← nav, scroll story, kartu ahli
+│   ├── demo.js                     ← demo interaktif di browser
+│   ├── engine.js                   ← port browser dari engine
+│   ├── data.js
+│   └── test_engine.mjs             ← uji port browser
+│
+├── demo-video/                     ← video Remotion
+│   ├── src/scenes/                 ← 8 adegan
+│   ├── scripts/
+│   │   ├── generate_tts.py         ← narasi edge-tts
+│   │   └── merge_audio_natural.sh  ← gabung audio + video
+│   └── out/                        ← hasil render (gitignored)
+│
+├── tools/
+│   ├── build_skill.py              ← salin engine+data ke skill/ (--check)
+│   ├── export_conversation.py      ← ekspor transkrip ke Markdown
+│   ├── build_data.py
+│   └── check_site.mjs              ← cek overflow & screenshot
+│
+├── submission-assets/              ← berkas untuk form submission
+│   ├── project-description.md
+│   ├── SAKSI-Cover-16x9.jpg
+│   ├── SAKSI-demo-video-final.mp4
+│   ├── WorkBuddy-Conversation-History.md
+│   ├── real/                       ← 4 tangkapan asli WorkBuddy
+│   ├── saksi-architecture/         ← PPT arsitektur
+│   └── expert/saksi.zip            ← paket Ahli WorkBuddy
 │
 ├── evidence/
 │   ├── audit-sample.jsonl          ← sample (sanitized)
 │   ├── test-transcripts.md         ← output verbatim
-│   ├── README.md
-│   └── screenshots/                ← screenshot demo
+│   ├── screenshots/                ← screenshot demo
+│   └── README.md
 │
 └── tests/
     ├── manual-tests.md             ← 20 test case
@@ -322,18 +360,19 @@ saksi-hackathon/
 
 **Tonton demo video:** https://youtu.be/AMkMF_ZJjUo
 
-Durasi 4.9 menit (294 detik) dengan narasi Bahasa Indonesia:
+Durasi **5:15.9** (315.9 detik, 9.477 frame) dengan narasi Bahasa Indonesia:
 
-1. Hook — statistik puskesmas, data sensitif, tagline SAKSI
-2. Overview arsitektur — 3 lapis, 4 trust boundary
-3. Demo: Jawaban berbukti — evidence cards, identitas terverifikasi
-4. Demo: Refusal equivalence — Cakalang vs Naga, respons identik
-5. Demo: Konflik temporal — sumber lama vs baru, resolusi dengan alasan
-6. Demo: Prompt injection defense — instruksi tersembunyi dinonaktifkan
+1. Hook — informasi tersebar di mana-mana, satu kebocoran bukan bug tapi insiden
+2. **Gerbang izin** — pertanyaan identik, dua pengguna: 21/42/0 vs 1/42/5
+3. Jawaban berbukti — evidence cards, identitas terverifikasi
+4. Refusal equivalence — Cakalang vs Naga, respons identik
+5. Konflik temporal — sumber lama vs baru, resolusi dengan alasan
+6. Prompt injection defense — instruksi tersembunyi dinonaktifkan
 7. Audit ledger — metadata-only, PII disamarkan
-8. Summary — 13/13 test lulus, "Setiap jawaban punya lima saksi"
+8. **Pasang satu klik** — Expert Center, "Tambahkan ke Ahli Saya"
 
-Script lengkap: [`docs/demo-script.md`](./docs/demo-script.md)
+Peta adegan lengkap beserta narasi dan cara membangun ulang:
+[`docs/demo-script.md`](./docs/demo-script.md)
 
 Video dibuat dengan Remotion (React + TypeScript). Source code: [`demo-video/`](./demo-video/)
 
@@ -341,18 +380,23 @@ Video dibuat dengan Remotion (React + TypeScript). Source code: [`demo-video/`](
 
 ## 📄 Submission Artefak
 
+Panduan lengkap mengisi form submission (teks siap copy + lokasi file):
+[`SUBMIT.md`](./SUBMIT.md)
+
 | Artefak | File | Status |
 |:---|:---|:---:|
 | Project title | SAKSI — Evidence-to-Decision Engine | ✅ |
-| Short blurb | "Workplace brain berizin, bersumber, dan berjejak audit." | ✅ |
+| Short blurb | "Workplace brain yang membuktikan jawabannya — dan berani menolak." | ✅ |
 | Live demo | https://saksi-demo.apps.workbuddy.host/?sharecode=WGMP2W2QLO | ✅ |
-| Project description | [`docs/`](./docs/) | ✅ |
+| Project description | [`submission-assets/project-description.md`](./submission-assets/project-description.md) | ✅ |
 | Accountability sheet | [`docs/accountability.md`](./docs/accountability.md) | ✅ |
 | Test results | [`docs/test-results.md`](./docs/test-results.md) | ✅ |
 | Architecture diagram | [`docs/architecture.md`](./docs/architecture.md) · `submission-assets/saksi-architecture/SAKSI-Architecture-Diagram.pptx` | ✅ |
 | Cover image 16:9 | `submission-assets/SAKSI-Cover-16x9.jpg` (1636×920, 261 KB) | ✅ |
-| WorkBuddy conversation history | `submission-assets/shot-1..4-*.png` (4 real screen captures) | ✅ |
-| Demo video | `demo-video/out/saksi-demo-final.mp4` | ✅ |
+| Chat log screenshots | `submission-assets/real/real-1..4-*.png` (4 tangkapan asli WorkBuddy) | ✅ |
+| WorkBuddy conversation history | `submission-assets/WorkBuddy-Conversation-History.md` | ✅ |
+| Expert package | `submission-assets/expert/saksi.zip` (16 file, 84 KB) | ✅ |
+| Demo video | `submission-assets/SAKSI-demo-video-final.mp4` (5:16, 17.9 MB) | ✅ |
 | Product sharing | [`docs/product-sharing.md`](./docs/product-sharing.md) | ✅ |
 | Source code | Repo ini | ✅ |
 

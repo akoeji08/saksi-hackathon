@@ -148,8 +148,27 @@ Output harus `TERVERIFIKASI` dengan `sources: [DOC-010, ...]`.
 ### Detail Lengkap
 
 - Test results: `docs/test-results.md`
-- Demo script: `docs/demo-script.md`
+- Demo script & peta adegan video: `docs/demo-script.md`
 - Accountability sheet: `docs/accountability.md`
 - Architecture: `docs/architecture.md`
+- Paket submission: `SUBMIT.md`
+
+### Bukti gerbang izin
+
+Setiap keluaran engine membawa `_meta.gate`, sehingga gerbang izin bisa diperiksa dari
+luar — bukan hanya diklaim:
+
+```bash
+node skill/scripts/set-user.mjs STF-005
+node skill/scripts/ask.mjs --query "Apa itu Proyek Cakalang?"
+# -> BUKTI_BELUM_CUKUP, gate: 21 diblokir / 42 dipindai / 0 lolos
+
+node skill/scripts/set-user.mjs STF-001
+node skill/scripts/ask.mjs --query "Apa itu Proyek Cakalang?"
+# -> TERVERIFIKASI, gate: 1 diblokir / 42 dipindai / 5 lolos
+```
+
+`scanned` (42) sama di kedua kasus. Yang berbeda hanya `blockedTotal` dan `allowed` —
+bukti bahwa yang berubah adalah izin, bukan kata-kata dalam jawaban.
 
 ---

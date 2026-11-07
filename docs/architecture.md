@@ -198,7 +198,52 @@ Engine Layer (permission gate -> retrieval -> scoring -> conflict -> injection -
 | **Mekanisme** | `canAccess()` dipanggil **sebelum** retrieval. Dokumen yang tidak lolos tidak masuk `candidates[]` |
 | **Mengapa** | Jika dokumen terlarang masuk konteks LLM, "jangan bocorkan" di prompt adalah mitigasi kosmetik |
 | **Bukti** | Test 4 (`BUKTI_BELUM_CUKUP` tanpa menyiratkan eksistensi Cakalang) |
+| **Observabilitas** | Setiap keluaran membawa `_meta.gate` — lihat §5.1 |
 | **Risiko jika gagal** | LLM bisa membocorkan isi dokumen terlarang meski diinstruksikan tidak |
+
+#### 5.1 — Penghitung gerbang (`_meta.gate`)
+
+Batas B3 tidak cukup hanya diklaim; ia harus **bisa diperiksa dari luar**. Karena itu
+engine menghitung setiap dokumen dan chat yang dipindai, termasuk yang ditolak:
+
+```json
+"_meta": {
+  "user": "STF-005",
+  "gate": {
+    "blockedDocs": 9,
+    "blockedChats": 12,
+    "blockedTotal": 21,
+    "scanned": 42,
+    "allowed": 0
+  }
+}
+```
+
+| Field | Arti |
+|:---|:---|
+| `scanned` | Total dokumen + chat yang diperiksa pada kueri ini (selalu 42 dengan dataset contoh) |
+| `blockedDocs` / `blockedChats` | Yang ditolak ACL, dipecah per jenis sumber |
+| `blockedTotal` | Jumlah keduanya |
+| `allowed` | Kandidat yang lolos ke tahap scoring |
+
+**Kenapa ini penting.** `scanned` dihitung **sebelum** pemeriksaan izin, sehingga
+`blockedTotal + allowed ≤ scanned` selalu berlaku dan bisa diverifikasi. Kalau suatu saat
+penghitung ini tidak lagi konsisten, berarti ada jalur yang melewati gerbang.
+
+Perbandingan dengan pertanyaan identik (`Apa itu Proyek Cakalang?`):
+
+| | STF-005 (internal) | STF-001 (top_secret_medical) |
+|:---|:---|:---|
+| `blockedTotal` | 21 | 1 |
+| `scanned` | 42 | 42 |
+| `allowed` | 0 | 5 |
+| `status` | `BUKTI_BELUM_CUKUP` | `TERVERIFIKASI` |
+
+`scanned` sama, `blockedTotal` berbeda, `allowed` berbeda. Itulah bukti bahwa yang berubah
+adalah **izin**, bukan sekadar kata-kata dalam jawaban.
+
+CLI (`engine/ask.mjs`) dan port browser (`live-demo/engine.js`) memakai struktur `gate`
+yang sama, sehingga angka di video demo, di situs publik, dan di terminal selalu cocok.
 
 ### B4 — Engine → Audit
 
@@ -236,6 +281,12 @@ Engine Layer (permission gate -> retrieval -> scoring -> conflict -> injection -
 | `KONFLIK` | Dua sumber bertentangan | Supersession atau outdated vs active |
 | `BUKTI_BELUM_CUKUP` | Tidak ada bukti relevan atau akses ditolak | candidates = [] atau quality gate gagal |
 | `ERROR` | Bug internal atau data corrupt | Data load fail, user tidak ditemukan |
+
+**Catatan penting:** `BUKTI_BELUM_CUKUP` sengaja **tidak** membedakan "data tidak ada"
+dari "akses ditolak". Kalau engine membedakannya, penolakan itu sendiri menjadi saluran
+kebocoran — pengguna bisa menyimpulkan eksistensi data dari perbedaan pesan. Inilah dasar
+refusal equivalence. Penghitung `_meta.gate` tetap membedakannya, tapi ia hanya untuk
+operator dan audit, bukan untuk pengguna akhir.
 
 ---
 
