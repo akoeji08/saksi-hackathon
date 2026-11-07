@@ -23,7 +23,8 @@ lengkap dengan lokasi file yang perlu diunggah.
 **Dua hal yang hanya bisa Anda lakukan:**
 
 1. **Unggah video baru ke YouTube** (§7) — link lama menunjuk ke video versi lama.
-2. **Publish Expert di Expert Center** (§8, opsional) — untuk mendapat tautan launcher.
+2. **Klik "Bagikan" pada kartu SAKSI** (§8) — menghasilkan tautan launcher seperti
+   punya Skala. Setelah tersalin, satu perintah menempelkannya ke situs.
 
 ---
 
@@ -285,17 +286,62 @@ Link lama (untuk referensi): `https://youtu.be/AMkMF_ZJjUo`
 
 ---
 
-## 8. Opsional — Expert package
+## 8. Menerbitkan Expert — supaya juri bisa mencoba tanpa clone
+
+Paketnya ada di:
 
 ```
 C:\saksi-hackathon\submission-assets\expert\saksi.zip
 ```
 
-84 KB, 16 file. Berisi paket Ahli WorkBuddy yang mandiri: engine, dataset, skrip, dan
-avatar. Sudah diuji dengan cara diekstrak ke direktori kosong tanpa repo — berjalan benar.
-Berguna kalau juri ingin mencoba SAKSI langsung di WorkBuddy mereka tanpa clone repo.
-Kalau form tidak menyediakan tempat untuk file tambahan, lampirkan di deskripsi sebagai
-tautan GitHub saja.
+84 KB, 16 file. Isi: engine, dataset, skrip, dan avatar. Sudah diuji dengan cara
+diekstrak ke direktori kosong tanpa repo — berjalan benar.
+
+Tapi ada dua hal berbeda yang orang sering tertukar, dan keduanya ada di menu
+yang sama. Pilih sesuai tujuan:
+
+| Aksi di menu | Yang terjadi | Untuk apa |
+|:---|:---|:---|
+| **Bagikan** (Share) | Paket diunggah, Anda dapat `sharecode`, tautan tersalin ke clipboard: `workbuddy.ai/work/launch/?sharecode=…` | **Ini yang Anda butuhkan.** Satu tautan, juri klik, kartu ahli terbuka, "Tambahkan ke Ahli Saya" |
+| **Publikasikan ke Perpustakaan** (Publish to Library) | Dikirim ke pustaka publik Expert Center, status jadi *Under Review* lalu *Published* | Biar muncul di daftar publik. Perlu peninjauan, tidak instan |
+
+Tautan yang dipakai Skala (`workbuddy.ai/work/launch/?sharecode=…`) adalah hasil
+**Bagikan**, bukan Publikasikan. Jadi dahulukan Bagikan.
+
+### Langkah persisnya
+
+1. Buka WorkBuddy → sidebar kiri → **Ahli · Keterampilan · Penghubung**
+2. Klik **My Experts** (kanan atas)
+3. Arahkan kursor ke kartu **Evidence-to-Decision Engine | SAKSI** — muncul tombol
+   `···` dan `Summon`
+4. Klik `···` → menu berisi: **Lihat · Sunting · Bagikan · Publikasikan ke
+   Perpustakaan · Hapus**
+5. Klik **Bagikan**. Tautan otomatis tersalin.
+
+> Menu ini berbahasa Inggris untuk sebagian label (`Share`, `Publish to Library`)
+> karena terjemahan Indonesianya belum lengkap. Isinya sama.
+
+### Setelah tautan tersalin
+
+Jalankan satu perintah — skrip membaca clipboard, memvalidasi bahwa itu benar
+tautan peluncuran, lalu menempelkannya ke tombol di situs:
+
+```powershell
+cd C:\saksi-hackathon
+python tools\wire_launch.py
+```
+
+Cek hasilnya tanpa mengubah apa pun:
+
+```powershell
+python tools\wire_launch.py --check
+```
+
+Setelah itu tombol **Tambahkan ke Ahli Saya** di situs langsung membuka kartu ahli
+di WorkBuddy, bukan lagi menampilkan teks cadangan. Terakhir, deploy ulang situsnya.
+
+Kalau form tidak menyediakan tempat untuk file tambahan, lampirkan tautan
+peluncuran itu di deskripsi sebagai pengganti lampiran zip.
 
 ---
 
