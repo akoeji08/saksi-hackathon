@@ -396,7 +396,7 @@ Panduan lengkap mengisi form submission (teks siap copy + lokasi file):
 | Chat log screenshots | `submission-assets/real/real-1..4-*.png` (4 tangkapan asli WorkBuddy) | ✅ |
 | WorkBuddy conversation history | `submission-assets/WorkBuddy-Conversation-History.md` | ✅ |
 | Expert package | `submission-assets/expert/saksi.zip` (16 file, 84 KB) | ✅ |
-| Demo video | `submission-assets/SAKSI-demo-video-final.mp4` (5:16, 17.9 MB) | ✅ |
+| Demo video | `submission-assets/SAKSI-demo-video-final.mp4` (5:16, ~17 MB) | ✅ |
 | Product sharing | [`docs/product-sharing.md`](./docs/product-sharing.md) | ✅ |
 | Source code | Repo ini | ✅ |
 

@@ -226,7 +226,7 @@ C:\saksi-hackathon\submission-assets\SAKSI-demo-video-final.mp4
 ```
 
 - Durasi **5:15.9**, 1920×1080, 30 fps
-- Ukuran 17.9 MB
+- Ukuran **17,895,023 byte** (Windows menampilkan ~17.0 MB)
 - Narasi bahasa Indonesia, tempo natural
 
 ---
