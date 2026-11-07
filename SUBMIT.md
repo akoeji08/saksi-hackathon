@@ -19,8 +19,9 @@ lengkap dengan lokasi file yang perlu diunggah.
 | 6 | Project Link | ✅ Live | Sudah tayang dan terverifikasi |
 | 7 | Demo video | ✅ **Tayang** | 5:16, sudah diunggah ke YouTube (Unlisted) |
 | 8 | Expert launcher link | ✅ **Terbit** | `sharecode=N2ftbGk0…`, terpasang di tombol situs |
+| 9 | Social media post | ⬜ **Perlu 1 menit** | Posting teks siap-tempel di §12, lalu submit link-nya |
 
-**Status: tidak ada lagi yang tertahan.** Semua komponen siap diunggah.
+**Yang tersisa: satu postingan media sosial.** Semua komponen lain siap diunggah.
 
 Link video demo: `https://youtu.be/hDWy8_bPozI`
 
@@ -40,6 +41,7 @@ Link video demo: `https://youtu.be/hDWy8_bPozI`
 | Project Link | URL | §6 |
 | Demo Video | URL | §7 |
 | GitHub / Source | URL | §6 |
+| Social Media Post Link | URL postingan | §12 → teks di `submission-assets\social-posts.md` |
 
 ---
 
@@ -452,6 +454,45 @@ audit ke format yang bisa diperiksa auditor eksternal.
 2. Simpan link video dan link demo di satu tempat
 3. Kalau ada sesi tanya jawab juri, siapkan demo langsung — panduan urutan kueri ada di
    `docs/demo-script.md` §5
+
+---
+
+## 12. Social media post — field yang mudah terlewat
+
+Form meminta: *"Publish the project on social media platforms such as YouTube, X, Threads
+or others with the hashtags #WorkBuddy and #TencentCloudHackathon, and submit the post
+link."*
+
+Yang dinilai bukan panjangnya, tapi apakah postingannya **ada, publik, dan memuat kedua
+hashtag**. Teks lengkap untuk tiap platform ada di
+`submission-assets\social-posts.md`.
+
+**Jalur tercepat yang tetap bagus — X, satu postingan:**
+
+```
+Satu pertanyaan. Dua pengguna. Dua jawaban berbeda.
+
+STF-005 → 21 diblokir / 42 dipindai / 0 lolos
+STF-001 → 1 diblokir / 42 dipindai / 5 lolos
+
+SAKSI: workplace brain yang periksa izin sebelum menjawab.
+
+youtu.be/hDWy8_bPozI
+#WorkBuddy #TencentCloudHackathon
+```
+
+262 karakter (batas X 280), jadi masih muat tanpa dipotong.
+
+1. Buka `https://x.com/compose/post` → tempel → kirim
+2. Klik postingannya → salin URL dari address bar (`https://x.com/<akun>/status/<id>`)
+3. Buka URL itu di incognito — kalau terbuka tanpa login, berarti publik
+4. Tempel ke field **Social Media Post Link**
+
+**Alternatif kalau tidak mau bikin postingan baru:** tambahkan
+`#WorkBuddy #TencentCloudHackathon` di akhir deskripsi YouTube, lalu submit
+`https://youtu.be/hDWy8_bPozI`. Sah menurut bunyi field-nya, tapi paling lemah kesannya.
+
+Jangan pakai `#workbuddy` saja atau `#TencentCloud` saja — dua-duanya harus ada.
 
 ---
 
